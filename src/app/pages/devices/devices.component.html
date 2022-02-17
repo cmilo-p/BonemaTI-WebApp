@@ -1,0 +1,49 @@
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="CÓDIGO">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> CÓDIGO </th>
+      <td mat-cell *matCellDef="let row"> {{row.code}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="TIPO DISPOSITIVO">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> TIPO DISPOSITIVO </th>
+      <td mat-cell *matCellDef="let row"> {{row.tpDevice}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="NOMBRE EQUIPO">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> NOMBRE EQUIPO </th>
+      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ASIGNADO A">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ASIGNADO A </th>
+      <td mat-cell *matCellDef="let row"> {{row.employee}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="UBICACIÓN">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> UBICACIÓN </th>
+      <td mat-cell *matCellDef="let row"> {{'BONEMA'}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="ESTADO">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ESTADO </th>
+      <td mat-cell *matCellDef="let row"> {{row.state}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No hay datos para mostrar"{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of users"></mat-paginator>
+</div>
