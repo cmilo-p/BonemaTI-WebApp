@@ -8,6 +8,7 @@ export class Device {
         public serial: string,
         public marca: string,
         public modelo: string,
+        public location: string,
         
         public hardware: Hardware,
         public software: Software,
@@ -26,7 +27,7 @@ export class Hardware {
         public cpu: string,
         public generation: string,
         public hardDisk: string,
-        public itecture: string,
+        public architecture: string,
         public bios: string
     ) { }
 

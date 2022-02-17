@@ -18,8 +18,12 @@ export class DevicesService {
     return 'Servicio Device';
   }
 
-  getHost(): Observable<any> {
+  getHosts(): Observable<any> {
     return this._http.get(this.url + 'hosts');
+  }
+
+  getHost(hostId: any): Observable<any> {
+    return this._http.get(this.url + 'host/' + hostId);
   }
 
 }

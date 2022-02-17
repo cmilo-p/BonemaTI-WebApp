@@ -3,7 +3,6 @@ import { Device } from 'src/app/models/Devices';
 import { DevicesService } from 'src/app/services/devices.service';
 
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
@@ -18,7 +17,6 @@ export class DevicesComponent implements AfterViewInit, OnInit {
   public dataSource: MatTableDataSource<Device>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private deviceSvc: DevicesService
@@ -29,11 +27,10 @@ export class DevicesComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   ngOnInit(): void {
-    this.deviceSvc.getHost().subscribe(
+    this.deviceSvc.getHosts().subscribe(
       {
         next: (response) => {
           //this.hosts = response.hosts;
