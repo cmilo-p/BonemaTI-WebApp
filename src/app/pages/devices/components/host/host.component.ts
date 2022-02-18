@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DevicesService } from 'src/app/services/devices.service';
 import { Device } from 'src/app/models/Devices';
 
@@ -37,6 +37,10 @@ export class HostComponent implements OnInit {
         );
       }
     );
+  }
+
+  onSubmit() {
+    console.log('enviado');
   }
 
 }

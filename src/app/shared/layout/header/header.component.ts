@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Global } from 'src/app/services/global';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  public company: string;
+
+  constructor() {
+    this.company = Global.company;
+   }
 
   ngOnInit(): void {
   }

@@ -26,4 +26,19 @@ export class DevicesService {
     return this._http.get(this.url + 'host/' + hostId);
   }
 
+  update(id: any, host: any): Observable<any> {
+
+    let params = JSON.stringify(host);
+    let headers = new HttpHeaders().set('content-Type', 'application/json');
+
+    return this._http.put(this.url + 'host/' + id, params, { headers: headers });
+  }
+
+  delete(id: any): Observable<any> {
+
+    let headers = new HttpHeaders().set('content-Type', 'application/json');
+
+    return this._http.put(this.url + 'host/' + id, { headers: headers });
+  }
+
 }

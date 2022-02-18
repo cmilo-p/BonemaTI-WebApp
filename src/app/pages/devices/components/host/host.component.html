@@ -1,99 +1,157 @@
-<h1> {{ host.code }} </h1>
-<h2> {{ host.name }} </h2>
+<div class="row">
+    <div class="col-12">
+        <h1> {{ host.code }} </h1>
+        <h2> {{ host.name }} </h2>
+    </div>
+</div>
 
-<button mat-raised-button color="primary" [routerLink]="['/devices']">
-    <mat-icon>arrow_back</mat-icon>
-</button>
+<div class="row my-3">
+    <div class="col-12">
 
-<button mat-raised-button color="accent">
-    <mat-icon>edit</mat-icon>
-</button>
+        <button mat-raised-button color="primary" [routerLink]="['/devices']">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
 
-<button mat-raised-button color="warn">
-    <mat-icon>delete</mat-icon>
-</button>
+        <button mat-raised-button color="accent">
+            <mat-icon>edit</mat-icon>
+        </button>
 
-<mat-tab-group>
-    <form>
-        <mat-tab label="Pc">
+        <button mat-raised-button color="warn">
+            <mat-icon>delete</mat-icon>
+        </button>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Código</mat-label>
-                <input matInput type="text" value="{{ host.code }}" readonly>
-            </mat-form-field>
+    </div>
+</div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Tipo Dispositivo</mat-label>
-                <input matInput type="text" value="{{ host.tpDevice }}" readonly>
-            </mat-form-field>
+<div class="row">
+    <div class="col-12">
+        <form #hostForm (submit)="onSubmit()">
+            <mat-tab-group>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Serial</mat-label>
-                <input matInput type="text" value="{{ host.serial }}" readonly>
-            </mat-form-field>
+                <mat-tab label="General">
 
-            <mat-form-field appearance="outline">
-                <mat-label>Marca</mat-label>
-                <input matInput type="text" value="{{ host.marca }}" readonly>
-            </mat-form-field>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <mat-form-field appearance="fill">
+                                <mat-label>Funcionario Responsable</mat-label>
+                                <input matInput type="text" value="{{ host.employee }}" readonly>
+                            </mat-form-field>
+                        </div>
+                    </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>modelo</mat-label>
-                <input matInput type="text" value="{{ host.modelo }}" readonly>
-            </mat-form-field>
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Codigo</mat-label>
+                                <input matInput type="text" value="{{ host.code }}" readonly>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-lg-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombre Equipo</mat-label>
+                                <input matInput type="text" value="{{ host.name }}" readonly>
+                            </mat-form-field>
+                        </div>
+                    </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Asignado a</mat-label>
-                <input matInput type="text" value="{{ host.employee }}" readonly>
-            </mat-form-field>
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Serial</mat-label>
+                                <input matInput type="text" value="{{ host.serial }}" readonly>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-lg-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Marca</mat-label>
+                                <input matInput type="text" value="{{ host.marca }}" readonly>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-lg-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>modelo</mat-label>
+                                <input matInput type="text" value="{{ host.modelo }}" readonly>
+                            </mat-form-field>
+                        </div>
+                    </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Ubicación</mat-label>
-                <input matInput type="text" value="{{ host.location }}" readonly>
-            </mat-form-field>
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tipo Dispositivo</mat-label>
+                                <input matInput type="text" value="{{ host.tpDevice }}" readonly>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-lg-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Ubicación</mat-label>
+                                <input matInput type="text" value="{{ host.location }}" readonly>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-lg-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Estado</mat-label>
+                                <input matInput type="text" value="{{ host.state }}" readonly>
+                            </mat-form-field>
+                        </div>
+                    </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Estado</mat-label>
-                <input matInput type="text" value="{{ host.state }}" readonly>
-            </mat-form-field>
+                </mat-tab>
 
-        </mat-tab>
+                <mat-tab label="Hardware">
 
-        <mat-tab label="Hardware">
-            
-            <mat-form-field appearance="outline">
-                <mat-label>RAM</mat-label>
-                <input matInput type="text" value="{{ host.hardware.ram }}" readonly>
-            </mat-form-field>
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>RAM</mat-label>
+                                <input matInput type="text" value="{{ host.hardware.ram }}" readonly>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-lg-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Disco Duro</mat-label>
+                                <input matInput type="text" value="{{ host.hardware.hardDisk }}" readonly>
+                            </mat-form-field>
+                        </div>
+                    </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>CPU</mat-label>
-                <input matInput type="text" value="{{ host.hardware.cpu }}" readonly>
-            </mat-form-field>
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>CPU</mat-label>
+                                <input matInput type="text" value="{{ host.hardware.cpu }}" readonly>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-lg-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Generación</mat-label>
+                                <input matInput type="text" value="{{ host.hardware.generation }}" readonly>
+                            </mat-form-field>
+                        </div>
+                    </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Generación</mat-label>
-                <input matInput type="text" value="{{ host.hardware.generation }}" readonly>
-            </mat-form-field>
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Arquitectura</mat-label>
+                                <input matInput type="text" value="{{ host.hardware.architecture }}" readonly>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-sm-12 col-lg-6">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Bios</mat-label>
+                                <input matInput type="text" value="{{ host.hardware.bios }}" readonly>
+                            </mat-form-field>
+                        </div>
+                    </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Disco Duro</mat-label>
-                <input matInput type="text" value="{{ host.hardware.hardDisk }}" readonly>
-            </mat-form-field>
+                </mat-tab>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Arquitectura</mat-label>
-                <input matInput type="text" value="{{ host.hardware.architecture }}" readonly>
-            </mat-form-field>
+                <mat-tab label="Software">
+                    404
+                </mat-tab>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Bios</mat-label>
-                <input matInput type="text" value="{{ host.hardware.bios }}" readonly>
-            </mat-form-field>
-
-        </mat-tab>
-
-        <mat-tab label="Software"> Software </mat-tab>
-        <mat-tab label="Historial"> Historial </mat-tab>
-    </form>
-</mat-tab-group>
+            </mat-tab-group>
+        </form>
+    </div>
+</div>

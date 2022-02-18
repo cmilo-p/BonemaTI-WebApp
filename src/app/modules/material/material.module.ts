@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 /* layout */
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 
 /* Utilities */
@@ -21,6 +22,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
   declarations: [],
   exports: [
     MatSidenavModule,
+    MatToolbarModule,
     MatListModule,
     MatButtonModule,
     MatIconModule,

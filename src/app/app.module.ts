@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 /* Modules */
 import { MaterialModule } from './modules/material/material.module';
+import { NgxChartModuleModule } from './modules/ngx-chart-module/ngx-chart-module.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './shared/layout/header/header.component';
 import { FooterComponent } from './shared/layout/footer/footer.component';
 import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
@@ -31,7 +32,8 @@ import { HomePagesComponent } from './pages/home-pages/home-pages.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    NgxChartModuleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
