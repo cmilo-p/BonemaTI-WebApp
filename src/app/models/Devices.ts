@@ -10,8 +10,8 @@ export class Device {
         public modelo: string,
         public location: string,
         
-        public hardware: Hardware,
-        public software: Software,
+        public hardware: any,
+        public software: any,
 
         public observation: string,
         public state: boolean,

@@ -33,7 +33,6 @@ export class DevicesComponent implements AfterViewInit, OnInit {
     this.deviceSvc.getHosts().subscribe(
       {
         next: (response) => {
-          //this.hosts = response.hosts;
           this.dataSource.data = response.hosts;
         },
         error: (error) => {

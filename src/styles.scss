@@ -14,3 +14,14 @@ a {
 .spacer {
     flex: 1 1 auto;
 }
+
+/* Iconos Centrados */
+.center-icon {
+    align-items: center;
+    margin-top: 1em;
+    margin-left: 1em;
+}
+.center-icon h1 {
+    display: inline;
+    margin: 5px;
+}

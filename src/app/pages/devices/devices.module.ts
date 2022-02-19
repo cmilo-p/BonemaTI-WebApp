@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { MaterialModule } from 'src/app/modules/material/material.module';
 
@@ -20,7 +21,8 @@ import { NewHostComponent } from './components/new-host/new-host.component';
   imports: [
     CommonModule,
     DevicesRoutingModule,
-    MaterialModule
+    FormsModule,
+    MaterialModule,
   ]
 })
 export class DevicesModule { }
