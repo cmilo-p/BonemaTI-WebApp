@@ -1,3 +1,5 @@
+import { ArrayType } from "@angular/compiler";
+
 export class Device {
 
     constructor(
@@ -9,8 +11,8 @@ export class Device {
         public marca: string,
         public modelo: string,
         public location: string,
-        
-        public hardware: any,
+
+        public hardware: Hardware,
         public software: any,
 
         public observation: string,
@@ -30,11 +32,5 @@ export class Hardware {
         public architecture: string,
         public bios: string
     ) { }
-
-}
-
-export class Software {
-
-    constructor() {}
 
 }

@@ -26,6 +26,13 @@ export class DevicesService {
     return this._http.get(this.url + 'host/' + hostId);
   }
 
+  create(host: any): Observable<any> {
+    let params = JSON.stringify(host);
+    let headers = new HttpHeaders().set('content-Type', 'application/json');
+
+    return this._http.post(this.url + 'host/save', params, { headers: headers });
+  }
+
   update(id: any, host: any): Observable<any> {
 
     let params = JSON.stringify(host);

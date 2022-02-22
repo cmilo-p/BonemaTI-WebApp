@@ -4,9 +4,10 @@
     </div>
 </div>
 
-<div class="container">
-    <form #hostForm="ngForm" (submit)="onSubmit()">
+<div class="m-5">
+    <form #hostForm="ngForm" (ngSubmit)="onSubmit()">
 
+        <!-- Generales -->
         <div class="row">
             <div class="col-sm-12 col-lg-4">
                 <mat-form-field appearance="outline">
@@ -28,6 +29,7 @@
             </div>
         </div>
 
+        <!-- Usuario -->
         <div class="row">
             <div class="col-sm-12 col-lg-4">
                 <mat-form-field appearance="outline">
@@ -35,14 +37,20 @@
                     <input matInput type="text" name="location" #location="ngModel" [(ngModel)]="host.location">
                 </mat-form-field>
             </div>
-            <div class="col-sm-12 col-lg-4">
+            <div class="col-sm-10 col-lg-4">
                 <mat-form-field appearance="outline">
                     <mat-label>Asignar a</mat-label>
                     <input matInput type="text" name="employee" #employee="ngModel" [(ngModel)]="host.employee">
                 </mat-form-field>
             </div>
+            <div class="col-sm-2 col-lg-4">
+                <button mat-raised-button color="primary">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
         </div>
 
+        <!-- Maquina -->
         <div class="row">
             <div class="col-sm-12 col-lg-4">
                 <mat-form-field appearance="outline">
@@ -64,7 +72,130 @@
             </div>
         </div>
 
+        <hr class="p-1">
 
+        <div class="row">
+            <div class="col-sm-12 col-lg-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>RAM</mat-label>
+                    <input matInput type="text" name="ram" #ram="ngModel" [(ngModel)]="host.hardware.ram">
+                </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Disco Duro</mat-label>
+                    <input matInput type="text" name="hardDisk" #hardDisk="ngModel"
+                        [(ngModel)]="host.hardware.hardDisk">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Hardware -->
+        <div class="row">
+            <div class="col-sm-12 col-lg-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>C.P.U</mat-label>
+                    <input matInput type="text" name="cpu" #cpu="ngModel" [(ngModel)]="host.hardware.cpu">
+                </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                <mat-form-field appearance="outline">
+                    <mat-label>Generación</mat-label>
+                    <input matInput type="text" name="generation" #generation="ngModel"
+                        [(ngModel)]="host.hardware.generation">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Arquitectura</mat-label>
+                    <input matInput type="text" name="architecture" #architecture="ngModel"
+                        [(ngModel)]="host.hardware.architecture">
+                </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>BIOS</mat-label>
+                    <input matInput type="text" name="bios" #bios="ngModel" [(ngModel)]="host.hardware.bios">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <hr class="p-1">
+
+        <!-- S/O -->
+        <div class="row">
+            <div class="col-sm-12 col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Sistema Operativo</mat-label>
+                    <input matInput type="text" name="system" #system="ngModel" [(ngModel)]="software.system.name">
+                </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Funcionalidad</mat-label>
+                    <input matInput type="text" name="system_functionality" #system_functionality="ngModel"
+                        [(ngModel)]="software.system.functionality">
+                </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Licencia</mat-label>
+                    <input matInput type="text" name="system_license" #system_license="ngModel"
+                        [(ngModel)]="software.system.license">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Office -->
+        <div class="row">
+            <div class="col-sm-12 col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Office</mat-label>
+                    <input matInput type="text" name="office" #office="ngModel" [(ngModel)]="software.office.name">
+                </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Funcionalidad</mat-label>
+                    <input matInput type="text" name="office_functionality" #office_functionality="ngModel"
+                        [(ngModel)]="software.office.functionality">
+                </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Licencia</mat-label>
+                    <input matInput type="text" name="office_license" #office_license="ngModel"
+                        [(ngModel)]="software.office.license">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <!-- Antivirus -->
+        <div class="row">
+            <div class="col-sm-12 col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Antivirus</mat-label>
+                    <input matInput type="text" name="antivirus" #antivirus="ngModel" [(ngModel)]="software.antivirus.name">
+                </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Funcionalidad</mat-label>
+                    <input matInput type="text" name="antivirus_functionality" #antivirus_functionality="ngModel"
+                        [(ngModel)]="software.antivirus.functionality">
+                </mat-form-field>
+            </div>
+            <div class="col-sm-12 col-lg-4">
+                <mat-form-field appearance="outline">
+                    <mat-label>Licencia</mat-label>
+                    <input matInput type="text" name="antivirus_license" #antivirus_license="ngModel"
+                        [(ngModel)]="software.antivirus.license">
+                </mat-form-field>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-12">

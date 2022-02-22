@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Device } from 'src/app/models/Devices';
+import { Device, Hardware } from 'src/app/models/Devices';
 import { DevicesService } from 'src/app/services/devices.service';
 
 @Component({
@@ -12,21 +12,40 @@ import { DevicesService } from 'src/app/services/devices.service';
 export class NewHostComponent implements OnInit {
 
   public host: Device;
+  public hardware: Hardware;
+  public software: any;
 
   constructor(
     private deviceSvc: DevicesService,
     private _rt: Router,
     private _route: ActivatedRoute
   ) {
-    this.host = new Device('', '', '', '', '', '', '', '', '', '', '', true, null);
+
+    this.software = {
+      system: { name: '', functionality : '', license: '' },
+      office: { name: '', functionality : '', license: '' },
+      antivirus: { name: '', functionality : '', license: '' },
+    }
+
+    this.hardware = new Hardware('', '', '', '', '', '');
+    this.host = new Device('', '', '', '', '', '', '', '', this.hardware, this.software, '', true, null);
   }
 
   ngOnInit(): void {
-    this.deviceSvc.prueba();
   }
 
   onSubmit() {
-    console.log('datos');
+    this.deviceSvc.create(this.host).subscribe(
+      {
+        next: (response) => {
+          this._rt.navigate(['/devices/']);
+          console.log(response);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      }
+    );
   }
 
 }
