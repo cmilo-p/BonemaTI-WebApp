@@ -14,10 +14,6 @@ export class DevicesService {
     this.url = Global.url;
   }
 
-  prueba() {
-    return 'Servicio Device';
-  }
-
   getHosts(): Observable<any> {
     return this._http.get(this.url + 'hosts');
   }

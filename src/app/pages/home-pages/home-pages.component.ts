@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 
 var single = [
   {
-    "name": "Germany",
-    "value": 8940000
+    "name": "Camilo Pinzón",
+    "value": 25
   },
   {
-    "name": "USA",
-    "value": 5000000
+    "name": "Mauricio ospina",
+    "value": 30
   },
   {
-    "name": "France",
-    "value": 7200000
+    "name": "Sebastian Rojas",
+    "value": 17
   }
 ];
 
@@ -24,7 +24,7 @@ export class HomePagesComponent {
 
   single =[]
 
-  view: [number, number] = [700, 400];
+  view: [number, number] = [800, 215];
 
   // options
   showXAxis = true;
@@ -32,9 +32,9 @@ export class HomePagesComponent {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Agentes';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'Cant. Tickets';
 
   constructor() {
     Object.assign(this, { single })
