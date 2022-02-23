@@ -30,7 +30,6 @@ export class DevicesService {
   }
 
   update(id: any, host: any): Observable<any> {
-
     let params = JSON.stringify(host);
     let headers = new HttpHeaders().set('content-Type', 'application/json');
 
@@ -38,7 +37,6 @@ export class DevicesService {
   }
 
   delete(id: any): Observable<any> {
-
     let headers = new HttpHeaders().set('content-Type', 'application/json');
 
     return this._http.put(this.url + 'host/' + id, { headers: headers });
