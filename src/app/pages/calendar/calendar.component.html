@@ -1,3 +1,53 @@
-<div class="container">
-    <full-calendar [options]="calendarOptions"></full-calendar>
+<div>
+    <form>
+        <div class="row">
+
+            <div class="col">
+                <mat-form-field appearance="outline">
+                    <mat-label>Fecha Inicial</mat-label>
+                    <input matInput type="date">
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field appearance="outline">
+                    <mat-label>Empleado</mat-label>
+                    <input matInput type="text">
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nombre Equipo</mat-label>
+                    <input matInput type="text">
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <mat-form-field appearance="outline">
+                    <mat-label>Tipo de Mantenimiento</mat-label>
+                    <mat-select>
+                        <mat-option>Selecionar</mat-option>
+                        <mat-option value="Software">Software</mat-option>
+                        <mat-option value="Hardware">Hardware</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col">
+                <button mat-raised-button class="m-3" color="primary">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-12">
+        <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
 </div>
