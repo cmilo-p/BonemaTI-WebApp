@@ -8,7 +8,7 @@ export class Appointment {
         public support_tec: string,
         public procedures: string,
         public observations: string,
-        public state: boolean
+        public status: string
     ) { }
 
 }

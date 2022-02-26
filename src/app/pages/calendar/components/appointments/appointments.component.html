@@ -1,0 +1,27 @@
+<div class="fs-6 mb-3 text-secondary">Mantenimientos Proximos:</div>
+
+<div *ngFor="let appointment of appointments" class="mb-2">
+    <mat-card class="shadow">
+
+        <mat-card-header>
+            <div mat-card-avatar [ngClass]="{
+                'card-header-image-1' : appointment.tpMaintenance == 'Preventivo',
+                'card-header-image-2' : appointment.tpMaintenance == 'Software'
+            }"></div>
+            <mat-card-title>{{ appointment.employee }}</mat-card-title>
+            <mat-card-subtitle>{{ appointment.date_appointment | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <div>
+                <span class="mx-2">Tipo:</span>
+                <a [routerLink]="['/no-existe']">{{ appointment.tpMaintenance }}</a>
+            </div>
+            <div>
+                <span class="mx-2">Estado:</span>
+                <span>{{ appointment.status }}</span>
+            </div>
+        </mat-card-content>
+
+    </mat-card>
+</div>

@@ -7,11 +7,13 @@ import { FullcalendarModule } from 'src/app/modules/fullcalendar/fullcalendar.mo
 
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { CalendarComponent } from './calendar.component';
+import { AppointmentsComponent } from './components/appointments/appointments.component';
 
 
 @NgModule({
   declarations: [
-    CalendarComponent
+    CalendarComponent,
+    AppointmentsComponent
   ],
   imports: [
     CommonModule,

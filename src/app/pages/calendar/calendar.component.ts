@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { Appointment } from 'src/app/models/Appointment';
 import { AppointmentsService } from 'src/app/services/appointments.service';
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -10,17 +11,16 @@ import { AppointmentsService } from 'src/app/services/appointments.service';
 })
 export class CalendarComponent implements OnInit {
 
-  public data!: Appointment[];
-  public eventos: any = []
+  public appointments!: Appointment[];
 
   public calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     dateClick: this.handleDateClick.bind(this),
-    events: this.eventos
-    /* [
-      { title: 'event 1', date: '2022-02-01' },
-      { title: 'event 2', date: '2022-02-02' }
-    ] */
+    events:
+      [
+        { title: 'event 1', date: '2022-02-01' },
+        { title: 'event 2', date: '2022-02-02' }
+      ]
   };
 
   constructor(private appointmentSvc: AppointmentsService) {
@@ -31,9 +31,12 @@ export class CalendarComponent implements OnInit {
     this.appointmentSvc.getAppointments().subscribe(
       {
         next: (response) => {
-          this.data = response.appointment;
-          console.log(this.data);
-          this.evento();
+          if (response) {
+            this.appointments = response.appointments;
+            console.log(this.appointments)
+          }else {
+
+          }
         },
         error: (error) => {
           console.log(error);
@@ -47,17 +50,13 @@ export class CalendarComponent implements OnInit {
     alert('date click! ' + arg.dateStr)
   }
 
-  evento() {
-    this.data.forEach(element => {
-
-      this.eventos = [ 
-        {title: element.tpMaintenance, date: element.date_appointment}
-      ]
-
-    
-      /* console.warn(element.tpMaintenance);
-      console.warn(element.date_appointment); */
-    });
-  }
+  /*   evento() {
+      this.data.forEach(element => {
+        let ISOfecha = new Date(element.date_appointment);
+        let fecha = ISOfecha.getFullYear() + '-' + '0' +ISOfecha.getMonth() + '-' + '0' + ISOfecha.getDay()
+  
+        this.eventos.push({ title: element.tpMaintenance, date: fecha })
+      });
+    } */
 
 }

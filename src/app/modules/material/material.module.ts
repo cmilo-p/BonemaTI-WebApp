@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 /* Utilities */
 import { MatButtonModule } from '@angular/material/button';
@@ -26,6 +27,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
+    MatExpansionModule,
     MatButtonModule,
     MatIconModule,
     MatTabsModule,
