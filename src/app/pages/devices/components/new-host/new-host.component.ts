@@ -3,6 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Device, Hardware } from 'src/app/models/Devices';
 import { DevicesService } from 'src/app/services/devices.service';
 
+import { MatDialog } from '@angular/material/dialog';
+import { EmployeesComponent } from 'src/app/pages/configuration/components/employees/employees.component';
+
 @Component({
   selector: 'app-new-host',
   templateUrl: './new-host.component.html',
@@ -18,13 +21,14 @@ export class NewHostComponent implements OnInit {
   constructor(
     private deviceSvc: DevicesService,
     private _rt: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    public dialog: MatDialog
   ) {
 
     this.software = {
-      system: { name: '', functionality : '', license: '' },
-      office: { name: '', functionality : '', license: '' },
-      antivirus: { name: '', functionality : '', license: '' },
+      system: { name: '', functionality: '', license: '' },
+      office: { name: '', functionality: '', license: '' },
+      antivirus: { name: '', functionality: '', license: '' },
     }
 
     this.hardware = new Hardware('', '', '', '', '', '');
@@ -46,6 +50,17 @@ export class NewHostComponent implements OnInit {
         }
       }
     );
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(EmployeesComponent);
+
+    
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+
   }
 
 }

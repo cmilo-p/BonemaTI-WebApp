@@ -1,70 +1,73 @@
-<div>
-    <form>
-        <div class="row">
+<div class="row">
+    <div class="col-11">
+        <mat-accordion class="headers-align">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Buscar Cita
+                    </mat-panel-title>
 
-            <div class="col">
-                <mat-form-field appearance="outline">
-                    <mat-label>Fecha Inicial</mat-label>
-                    <input matInput type="date">
-                </mat-form-field>
-            </div>
+                    <mat-panel-description>
+                        <span>&nbsp;</span>
+                        <mat-icon>search</mat-icon>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
 
-            <div class="col">
-                <mat-form-field appearance="outline">
-                    <mat-label>Empleado</mat-label>
-                    <input matInput type="text">
-                </mat-form-field>
-            </div>
+                <form>
+                    <div class="row">
 
-            <div class="col">
-                <mat-form-field appearance="outline">
-                    <mat-label>Nombre Equipo</mat-label>
-                    <input matInput type="text">
-                </mat-form-field>
-            </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Fecha Inicial</mat-label>
+                                <input matInput type="date">
+                            </mat-form-field>
+                        </div>
 
-            <div class="col">
-                <mat-form-field appearance="outline">
-                    <mat-label>Tipo de Mantenimiento</mat-label>
-                    <mat-select>
-                        <mat-option>Selecionar</mat-option>
-                        <mat-option value="Software">Software</mat-option>
-                        <mat-option value="Hardware">Hardware</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Empleado</mat-label>
+                                <input matInput type="text">
+                            </mat-form-field>
+                        </div>
 
-            <div class="col">
-                <button mat-raised-button class="m-3" color="primary">
-                    <mat-icon>search</mat-icon>
-                </button>
-            </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Nombre Equipo</mat-label>
+                                <input matInput type="text">
+                            </mat-form-field>
+                        </div>
 
+                        <div class="col">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tipo de Mantenimiento</mat-label>
+                                <mat-select>
+                                    <mat-option>Selecionar</mat-option>
+                                    <mat-option value="Software">Software</mat-option>
+                                    <mat-option value="Hardware">Hardware</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <button mat-raised-button class="m-3" color="primary">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div class="col-1">
+        <div class="text-center">
+            <button mat-icon-button color="primary">
+                <mat-icon>add_circle_outline</mat-icon>
+            </button>
         </div>
-    </form>
+    </div>
 </div>
-
-<mat-accordion>
-
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-
-            <mat-panel-title>
-                Self aware panel
-            </mat-panel-title>
-
-            <mat-panel-description>
-                DESCRIPCION
-            </mat-panel-description>
-
-        </mat-expansion-panel-header>
-
-        <p>I'm visible because I am open</p>
-
-    </mat-expansion-panel>
-
-</mat-accordion>
-
 
 <hr>
 

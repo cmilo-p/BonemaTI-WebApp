@@ -11,12 +11,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDialogModule } from '@angular/material/dialog';
 
 /* Forms */
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 /* Tables */
 import { MatTableModule } from '@angular/material/table';
@@ -33,10 +35,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatTabsModule,
     MatCardModule,
     MatExpansionModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatRadioModule,
+    MatCheckboxModule,
     MatTableModule,
     MatPaginatorModule
   ]
