@@ -14,6 +14,9 @@ import { EmployeesComponent } from 'src/app/pages/configuration/components/emplo
 })
 export class NewHostComponent implements OnInit {
 
+  public title_form: string;
+  public isEdit: boolean;
+
   public host: Device;
   public hardware: Hardware;
   public software: any;
@@ -24,15 +27,16 @@ export class NewHostComponent implements OnInit {
     private _route: ActivatedRoute,
     public dialog: MatDialog
   ) {
+    this.title_form = 'Nuevo';
+    this.isEdit = false;
 
     this.software = {
       system: { name: '', functionality: '', license: '' },
       office: { name: '', functionality: '', license: '' },
       antivirus: { name: '', functionality: '', license: '' },
     }
-
     this.hardware = new Hardware('', '', '', '', '', '');
-    this.host = new Device('', '', '', '', '', '', '', '', this.hardware, this.software, '', true, null);
+    this.host = new Device('','', '', '', '', '', '', '', '', this.hardware, this.software, '', true, null);
   }
 
   ngOnInit(): void {

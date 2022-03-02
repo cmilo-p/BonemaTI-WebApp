@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DevicesService } from 'src/app/services/devices.service';
 import { Device } from 'src/app/models/Devices';
 
@@ -15,6 +15,7 @@ export class HostComponent implements OnInit {
 
   constructor(
     private deviceSvc: DevicesService,
+    private _rt: Router,
     private _route: ActivatedRoute
   ) { }
 
@@ -39,8 +40,19 @@ export class HostComponent implements OnInit {
     );
   }
 
-  onSubmit() {
-    console.log('enviado');
+  delete(id: any) {
+    this.deviceSvc.delete(id).subscribe(
+      {
+        next: (response) => {
+          console.log(response);
+          this._rt.navigate(['/devices']);
+        },
+        error: (error) => {
+          console.log(error);
+          this._rt.navigate(['/devices/host', id]);
+        }
+      }
+    )
   }
 
 }

@@ -15,31 +15,31 @@ export class EmployeesService {
   }
 
   getEmployees(): Observable<any> {
-    return this._http.get(this.url + 'Employees');
+    return this._http.get(this.url + 'employees');
   }
 
   getEmployee(employeeId: any): Observable<any> {
-    return this._http.get(this.url + 'Employee/' + employeeId);
+    return this._http.get(this.url + 'employee/' + employeeId);
   }
 
   create(employee: any): Observable<any> {
     let params = JSON.stringify(employee);
     let headers = new HttpHeaders().set('content-Type', 'application/json');
 
-    return this._http.post(this.url + 'Employee/save', params, { headers: headers });
+    return this._http.post(this.url + 'employee/save', params, { headers: headers });
   }
 
   update(id: any, employee: any): Observable<any> {
     let params = JSON.stringify(employee);
     let headers = new HttpHeaders().set('content-Type', 'application/json');
 
-    return this._http.put(this.url + 'Employee/' + id, params, { headers: headers });
+    return this._http.put(this.url + 'employee/' + id, params, { headers: headers });
   }
 
   delete(id: any): Observable<any> {
     let headers = new HttpHeaders().set('content-Type', 'application/json');
 
-    return this._http.put(this.url + 'Employee/' + id, { headers: headers });
+    return this._http.delete(this.url + 'employee/' + id, { headers: headers });
   }
 
 }

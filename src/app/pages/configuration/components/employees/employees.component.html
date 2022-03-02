@@ -8,16 +8,10 @@
   </div>
 
   <div class="col-12">
-    <button mat-stroked-button [routerLink]="['/no-existe']" class="shadow" color="primary">
+    <button mat-stroked-button [routerLink]="['/config/newEmployee']" class="shadow" color="primary">
       Agregar Empleado
       <mat-icon>add_circle</mat-icon>
     </button>
-
-    <button mat-stroked-button [routerLink]="['/no-existe']" class="shadow" color="primary">
-      Insertar
-      <mat-icon>add_circle</mat-icon>
-    </button>
-    
   </div>
 
 </div>
@@ -38,12 +32,12 @@
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
           <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
-            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+            [indeterminate]="selection.hasValue() && !isAllSelected()">
           </mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let row">
           <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-            [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+            [checked]="selection.isSelected(row)">
           </mat-checkbox>
         </td>
       </ng-container>
@@ -53,7 +47,9 @@
 
       <ng-container matColumnDef="NOMBRE USUARIO">
         <th mat-header-cell *matHeaderCellDef> NOMBRE USUARIO </th>
-        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+        <td mat-cell *matCellDef="let row"> 
+          <a [routerLink]="['/config/editEmployee/', row._id]">{{row.name}}</a>   
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="CORREO ELECTRONICO">
@@ -75,6 +71,15 @@
       <ng-container matColumnDef="ESTADO">
         <th mat-header-cell *matHeaderCellDef> ESTADO </th>
         <td mat-cell *matCellDef="let row"> {{row.state}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="ELIMINAR">
+        <th mat-header-cell *matHeaderCellDef> ELIMINAR </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-raised-button color="warn" (click)="delete(row._id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

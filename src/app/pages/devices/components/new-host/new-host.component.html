@@ -1,3 +1,5 @@
+<h2>{{ title_form }}</h2>
+
 <div class="mx-4 my-3 p-5 border shadow">
     <form #hostForm="ngForm" id="hostForm" (ngSubmit)="onSubmit()">
 
@@ -236,9 +238,17 @@
                         <mat-icon class="text-secondary">save</mat-icon>
                     </button>
                     <br>
-                    <button mat-icon-button type="reset" class="m-2" [routerLink]="['/devices/']">
-                        <mat-icon color="warn">cancel</mat-icon>
-                    </button>
+                    <div *ngIf="isEdit then thenBlock; else elseBlock"></div>
+                    <ng-template #thenBlock>
+                        <button mat-icon-button type="reset" class="m-2" [routerLink]="['/devices/host', host._id]">
+                            <mat-icon color="warn">cancel</mat-icon>
+                        </button>
+                    </ng-template>
+                    <ng-template #elseBlock>
+                        <button mat-icon-button type="reset" class="m-2" [routerLink]="['/devices/']">
+                            <mat-icon color="warn">cancel</mat-icon>
+                        </button>
+                    </ng-template>
                 </nav>
             </div>
         </div>

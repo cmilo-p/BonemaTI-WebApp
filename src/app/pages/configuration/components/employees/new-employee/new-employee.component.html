@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-12">
+        <h1>{{ page_title }}</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        
+        <form #EmployeeForm="ngForm" (submit)="onSubmit()">
+
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>name</mat-label>
+                        <input matInput type="text" name="name" #name="ngModel" [(ngModel)]="employee.name">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>email</mat-label>
+                        <input matInput type="email" name="email" #email="ngModel" [(ngModel)]="employee.email">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>occupation</mat-label>
+                        <input matInput type="text" name="occupation" #occupation="ngModel" [(ngModel)]="employee.occupation">
+                    </mat-form-field>
+                </div>
+                <div class="col">
+                    <mat-form-field appearance="outline">
+                        <mat-label>phoneNumber</mat-label>
+                        <input matInput type="tel" name="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="employee.phoneNumber">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div>
+                <button mat-button type="submit">Enviar</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

@@ -1,8 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Employee } from 'src/app/models/Employee';
 import { EmployeesService } from 'src/app/services/employees.service';
 
-import {SelectionModel} from '@angular/cdk/collections';
+import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -21,9 +22,10 @@ export class EmployeesComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private employeeSvc: EmployeesService
+    private employeeSvc: EmployeesService,
+    private _rt: Router
   ) {
-    this.displayedColumns = ['select', 'NOMBRE USUARIO', 'CORREO ELECTRONICO', 'OCUPACIÓN', 'TELÉFONO', 'ESTADO'];
+    this.displayedColumns = ['select', 'NOMBRE USUARIO', 'CORREO ELECTRONICO', 'OCUPACIÓN', 'TELÉFONO', 'ESTADO','ELIMINAR'];
     this.dataSource = new MatTableDataSource();
   }
 
@@ -53,31 +55,37 @@ export class EmployeesComponent implements AfterViewInit, OnInit {
     }
   }
 
-    /** Whether the number of selected elements matches the total number of rows. */
-    isAllSelected() {
-      const numSelected = this.selection.selected.length;
-      const numRows = this.dataSource.data.length;
-      return numSelected === numRows;
-    }
-  
-    /** Selects all rows if they are not all selected; otherwise clear selection. */
-    masterToggle() {
-      if (this.isAllSelected()) {
-        this.selection.clear();
-        return;
-      }
-  
-      this.selection.select(...this.dataSource.data);
-    }
-  
-    /** The label for the checkbox on the passed row */
-    checkboxLabel(row?: Employee): string {
-      if (!row) {
-        return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-      }
-      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.name + 1}`;
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
     }
 
-    
+    this.selection.select(...this.dataSource.data);
+  }
+
+  delete(id: any) {
+    this.employeeSvc.delete(id).subscribe(
+      {
+        next:(response) => {
+          this._rt.navigate(['/config/employees']);
+          console.log(response);
+        },
+        error:(error) => {
+          this._rt.navigate(['/config/edit-employees', id]);
+          console.log(error);
+        }
+      }
+    );
+  }
+
 
 }

@@ -1,6 +1,7 @@
 export class Device {
 
     constructor(
+        public _id: string,
         public code: string,
         public tpDevice: string,
         public name: string,
