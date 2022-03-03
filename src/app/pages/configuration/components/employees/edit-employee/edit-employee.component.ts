@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Employee } from 'src/app/models/Employee';
 import { EmployeesService } from 'src/app/services/employees.service';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-edit-employee',
   templateUrl: '../new-employee/new-employee.component.html',
@@ -11,19 +13,20 @@ import { EmployeesService } from 'src/app/services/employees.service';
 export class EditEmployeeComponent implements OnInit {
 
   public page_title: string;
-  public status: string;
+  public isEdit: boolean;
 
   public employee: Employee;
 
   constructor(
-    private EmployeeSvc: EmployeesService,
+    private employeeSvc: EmployeesService,
     private _rt: Router,
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _snackBar: MatSnackBar
   ) {
-    this.page_title = 'Editar Empleado';
-    this.status = '';
+    this.page_title = 'DATOS EMPLEADO';
+    this.isEdit = true;
 
-    this.employee = new Employee('', '', '', '', '', true);
+    this.employee = new Employee('', '', '', '', '', '', true);
   }
 
   ngOnInit(): void {
@@ -31,23 +34,22 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   onSubmit() {
-    this.EmployeeSvc.update(this.employee._id, this.employee).subscribe(
+    this.employeeSvc.update(this.employee._id, this.employee).subscribe(
       {
         next: (response) => {
           if (response.status == 'success') {
-            this.status = response.status;
             this.employee = response.employeeUpdate
-
-            console.log(response);
-            this._rt.navigate(['/config/employees/']);
-
+            this.openSnackBar('¡Empleado Actualizado!', 'Cerrar');
           } else {
             this.employee = response.message;
-            console.log(response);
+            this.openSnackBar(response.message, 'Cerrar');
+            console.warn(response);
           }
         },
         error: (error) => {
-          console.log(error);
+          this._rt.navigate(['/config/employees']);
+          this.openSnackBar('Error al actualizar el usuario', 'Cerrar');
+          console.warn(error);
         }
       }
     );
@@ -55,25 +57,49 @@ export class EditEmployeeComponent implements OnInit {
 
   getEmployee() {
     this._route.params.subscribe(params => {
+
       let id = params['id'];
 
-      this.EmployeeSvc.getEmployee(id).subscribe(
+      this.employeeSvc.getEmployee(id).subscribe(
         {
           next: (response) => {
             if (response.employee) {
               this.employee = response.employee;
             } else {
-              console.log(response);
               this._rt.navigate(['/config/employees']);
+              this.openSnackBar(response.message, 'Cerrar');
+              console.warn(response);
             }
           },
           error: (error) => {
-            console.log(error);
             this._rt.navigate(['/config/employees']);
+            this.openSnackBar('Error al obtener el empleado', 'Cerrar');
+            console.warn(error);
           },
         }
       );
-    })
+
+    });
+  }
+
+  delete(id: any) {
+    this.employeeSvc.delete(id).subscribe(
+      {
+        next: (response) => {
+          this._rt.navigate(['/config/employees']);
+          this.openSnackBar('¡Empleado Eliminado!', 'Cerrar');
+        },
+        error: (error) => {
+          this._rt.navigate(['/config/employees']);
+          this.openSnackBar('Error al eliminar el empleado', 'Cerrar');
+          console.warn(error);
+        }
+      }
+    );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
 }

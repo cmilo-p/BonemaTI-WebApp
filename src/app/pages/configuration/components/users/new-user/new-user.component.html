@@ -6,46 +6,104 @@
 
 <div class="row">
 
-    <form #userForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="col-md-12 col-lg-7">
+        <mat-card class="shadow">
+            <form #userForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
 
-        <div class="col">
-            <mat-form-field appearance="outline">
-                <mat-label>name</mat-label>
-                <input matInput type="text" name="name" #name="ngModel" [(ngModel)]="user.name">
-            </mat-form-field>
+                <div class="row">
+                    <div class="col-12">
+                        <mat-form-field appearance="outline">
+                            <mat-label>NOMBRE USUARIO</mat-label>
+                            <input matInput type="text" name="name" #name="ngModel" [(ngModel)]="user.name" required>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12">
+                        <mat-form-field appearance="outline">
+                            <mat-label>CORREO ELECTRONICO</mat-label>
+                            <input matInput type="email" name="email" #email="ngModel" [(ngModel)]="user.email"
+                                required>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-12">
+                        <mat-form-field appearance="outline">
+                            <mat-label>USUARIO</mat-label>
+                            <input matInput type="text" name="username" #username="ngModel" [(ngModel)]="user.username"
+                                required>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>CONTRASEÑA</mat-label>
+                            <input matInput type="password" name="password" #password="ngModel"
+                                [(ngModel)]="user.password" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+
+                        <mat-form-field appearance="outline" *ngIf="!isEdit">
+                            <mat-label>CONFIRMAR CONTRASEÑA</mat-label>
+                            <input matInput type="password" name="password" #password="ngModel"
+                                [(ngModel)]="user.password">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" *ngIf="isEdit">
+                            <mat-label>Estado</mat-label>
+                            <input matInput type="text" name="state" #state="ngModel" [(ngModel)]="user.state">
+                        </mat-form-field>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Rol del Sistemas</mat-label>
+                            <mat-select name="role" #role="ngModel" [(ngModel)]="user.role" required>
+                                <mat-option></mat-option>
+                                <mat-option value="Administrador">Administrador</mat-option>
+                                <mat-option value="Jefe de Sistemas">Jefe de Sistemas</mat-option>
+                                <mat-option value="Soporté Técnico">Soporté Técnico</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <button mat-raised-button type="button" class="mx-1" [routerLink]="['/config/users']">
+                                <mat-icon>arrow_back</mat-icon>
+                            </button>
+                            <button mat-raised-button type="submit" *ngIf="!isEdit" color="primary" class="mx-1">
+                                <mat-icon>save</mat-icon>
+                            </button>
+                            <button mat-raised-button type="submit" *ngIf="isEdit" color="accent" class="mx-1">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <button mat-raised-button type="button" *ngIf="isEdit" color="warn" class="mx-1"
+                                (click)="delete(this.user._id)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </mat-card>
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-5">
+        <div class="text-center" *ngIf="!isEdit">
+            <img src="/assets/images/moduls/users/userEmpty.svg" alt="usersEmpty.svg">
         </div>
-
-        <div class="col">
-            <mat-form-field appearance="outline">
-                <mat-label>email</mat-label>
-                <input matInput type="text" name="email" #email="ngModel" [(ngModel)]="user.email">
-            </mat-form-field>
+        <div class="text-center" *ngIf="isEdit">
+            <img src="/assets/images/moduls/users/userSuccess.svg" alt="usersSuccess.svg">
         </div>
+    </div>
 
-        <div class="col">
-            <mat-form-field appearance="outline">
-                <mat-label>username</mat-label>
-                <input matInput type="text" name="username" #username="ngModel" [(ngModel)]="user.username">
-            </mat-form-field>
-        </div>
-
-        <div class="col">
-            <mat-form-field appearance="outline">
-                <mat-label>password</mat-label>
-                <input matInput type="text" name="password" #password="ngModel" [(ngModel)]="user.password">
-            </mat-form-field>
-        </div>
-
-        <div class="col">
-            <mat-form-field appearance="outline">
-                <mat-label>role</mat-label>
-                <input matInput type="text" name="role" #role="ngModel" [(ngModel)]="user.role">
-            </mat-form-field>
-        </div>
-
-        <div>
-            <button mat-button type="submit">Enviar</button>
-        </div>
-
-    </form>
 </div>

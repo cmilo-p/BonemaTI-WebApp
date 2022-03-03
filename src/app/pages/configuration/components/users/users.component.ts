@@ -51,4 +51,18 @@ export class UsersComponent implements AfterViewInit, OnInit {
     }
   }
 
+  delete(id: any) {
+    this.userSvc.delete(id).subscribe(
+      {
+        next: (response) => {
+          console.log(response)
+          alert('eliminado');
+        },
+        error: (error) => {
+          console.log(error)
+          alert('error');
+        },
+      }
+    )
+  }
 }

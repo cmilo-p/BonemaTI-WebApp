@@ -5,45 +5,82 @@
 </div>
 
 <div class="row">
-    <div class="col-12">
-        
-        <form #EmployeeForm="ngForm" (submit)="onSubmit()">
 
-            <div class="row">
-                <div class="col">
-                    <mat-form-field appearance="outline">
-                        <mat-label>name</mat-label>
-                        <input matInput type="text" name="name" #name="ngModel" [(ngModel)]="employee.name">
-                    </mat-form-field>
+    <div class="col-md-12 col-lg-7">
+        <mat-card>
+            <form #EmployeeForm="ngForm" (submit)="onSubmit()" autocomplete="off">
+
+                <div class="row">
+                    <div class="col-12">
+                        <mat-form-field appearance="outline">
+                            <mat-label>NOMBRE FUNCIONARIO</mat-label>
+                            <input matInput type="text" name="name" #name="ngModel" [(ngModel)]="employee.name" required>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>CORREO ELECTRONICO</mat-label>
+                            <input matInput type="email" name="email" #email="ngModel" [(ngModel)]="employee.email" required>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>OCUPACIÓN</mat-label>
+                            <input matInput type="text" name="occupation" #occupation="ngModel"
+                                [(ngModel)]="employee.occupation" required>
+                        </mat-form-field>
+                    </div>
                 </div>
-                <div class="col">
-                    <mat-form-field appearance="outline">
-                        <mat-label>email</mat-label>
-                        <input matInput type="email" name="email" #email="ngModel" [(ngModel)]="employee.email">
-                    </mat-form-field>
+
+                <div class="row">
+                    <div class="col-9">
+                        <mat-form-field appearance="outline">
+                            <mat-label>TELÉFONO</mat-label>
+                            <input matInput type="tel" name="phoneNumber" #phoneNumber="ngModel"
+                                [(ngModel)]="employee.phoneNumber">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3 required">
+                        <mat-form-field appearance="outline">
+                            <mat-label>EXT</mat-label>
+                            <input matInput type="tel" name="extension" #extension="ngModel" [(ngModel)]="employee.extension">
+                        </mat-form-field>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col">
-                    <mat-form-field appearance="outline">
-                        <mat-label>occupation</mat-label>
-                        <input matInput type="text" name="occupation" #occupation="ngModel" [(ngModel)]="employee.occupation">
-                    </mat-form-field>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="my-3">
+
+                            <button mat-raised-button type="button" class="mx-1 border" [routerLink]="['/config/employees']">
+                                <mat-icon>arrow_back</mat-icon>
+                            </button>
+
+                            <button mat-raised-button type="submit" *ngIf="!isEdit" class="mx-1" color="primary">
+                                <mat-icon>save</mat-icon>
+                            </button>
+
+                            <button mat-raised-button type="submit" *ngIf="isEdit" class="mx-1" color="accent">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+
+                            <button mat-raised-button type="button" *ngIf="isEdit" class="mx-1" color="warn" (click)="delete(employee._id)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="col">
-                    <mat-form-field appearance="outline">
-                        <mat-label>phoneNumber</mat-label>
-                        <input matInput type="tel" name="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="employee.phoneNumber">
-                    </mat-form-field>
-                </div>
-            </div>
 
-            <div>
-                <button mat-button type="submit">Enviar</button>
-            </div>
-
-        </form>
-
+            </form>
+        </mat-card>
     </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-5">
+        <div class="text-center" *ngIf="!isEdit">
+            <img src="/assets/images/moduls/employees/employeeEmpty.svg" alt="employeesEmpty.svg">
+        </div>
+        <div class="text-center" *ngIf="isEdit">
+            <img src="/assets/images/moduls/employees/employeeSuccess.svg" alt="employeesSuccess.svg">
+        </div>
+    </div>
+
 </div>

@@ -6,6 +6,7 @@ export class Employee {
         public email: string,
         public occupation: string,
         public phoneNumber: string,
+        public extension: string,
         public state: boolean
     ) { }
 

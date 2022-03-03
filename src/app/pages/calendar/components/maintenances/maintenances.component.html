@@ -1,0 +1,53 @@
+<div class="row mb-5">
+    <div class="col-12">
+        <mat-toolbar>
+            <span>Programación</span>
+            <span class="spacer"></span>
+            <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+              <mat-icon>favorite</mat-icon>
+            </button>
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+              <mat-icon>share</mat-icon>
+            </button>
+          </mat-toolbar>          
+    </div>
+</div>
+
+<div class="row  m-5">
+    <div class="col-6 border text-center">
+
+        <div class="example-container">
+            <h2 class="my-3">Usuarios Registrados</h2>
+          
+            <div
+              cdkDropList
+              #todoList="cdkDropList"
+              [cdkDropListData]="todo"
+              [cdkDropListConnectedTo]="[doneList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+            </div>
+          </div>
+        
+    </div>
+    <div class="col-6 border text-center">
+        
+        <div class="example-container">
+            <h2 class="my-3">Enviar Correo</h2>
+          
+            <div
+              cdkDropList
+              #doneList="cdkDropList"
+              [cdkDropListData]="done"
+              [cdkDropListConnectedTo]="[todoList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+            </div>
+          </div>
+
+    </div>
+</div>
+ 
+  
