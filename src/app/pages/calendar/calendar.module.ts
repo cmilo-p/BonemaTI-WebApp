@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 /* Modules */
 import { MaterialModule } from 'src/app/modules/material/material.module';
@@ -21,6 +22,7 @@ import { AppointmentComponent } from './components/appointment/appointment.compo
   ],
   imports: [
     CommonModule,
+    FormsModule,
     CalendarRoutingModule,
     MaterialModule,
     FullcalendarModule

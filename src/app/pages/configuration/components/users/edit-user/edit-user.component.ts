@@ -38,7 +38,7 @@ export class EditUserComponent implements OnInit {
       {
         next: (response) => {
           if (response.status == 'success') {
-            this.user = response.user;
+            this.user = response.userUpdate;
             this.openSnackBar('Usuario Actualizado!', 'Cerrar');
           } else {
             this.openSnackBar(response.message, 'Cerrar');
