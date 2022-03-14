@@ -15,7 +15,7 @@
         <mat-card-content>
             <div>
                 <span class="mx-2">Tipo:</span>
-                <a [routerLink]="['/calendar/appointment']">{{ appointment.tpMaintenance }}</a>
+                <a [routerLink]="['/calendar/appointment', appointment._id]">{{ appointment.tpMaintenance }}</a>
             </div>
             <div>
                 <span class="mx-2">Estado:</span>

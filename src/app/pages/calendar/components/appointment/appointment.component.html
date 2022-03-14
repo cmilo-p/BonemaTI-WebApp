@@ -1,1 +1,73 @@
-<p>appointment works!</p>
+<div class="row">
+    <div class="col-12">
+        <h1>Datos del Agendamiento</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <mat-card>
+            <form #dtaForm="ngForm">
+
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="outline">
+                            <mat-label>host</mat-label>
+                            <input matInput type="text" readonly>
+                        </mat-form-field>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="outline">
+                            <mat-label>date_appointment</mat-label>
+                            <input matInput type="text" readonly>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="outline">
+                            <mat-label>tpMaintenance</mat-label>
+                            <input matInput type="text" readonly>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field appearance="outline">
+                            <mat-label>support_tec</mat-label>
+                            <input matInput type="text" readonly>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="outline">
+                            <mat-label>employee</mat-label>
+                            <input matInput type="text" readonly>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>procedures</mat-label>
+                    <textarea matInput type="text" readonly></textarea>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>observations</mat-label>
+                    <textarea matInput type="text" readonly></textarea>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>status</mat-label>
+                    <input matInput type="text" readonly>
+                </mat-form-field>
+
+            </form>
+        </mat-card>
+    </div>
+</div>

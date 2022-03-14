@@ -1,6 +1,7 @@
 export class Appointment {
 
     constructor(
+        public _id: string,
         public date_appointment: any,
         public tpMaintenance: string,
         public host: string,

@@ -26,7 +26,7 @@ export class MaintenancesComponent implements OnInit {
     private employeeSvc: DevicesService,
     private appointmentSvc: AppointmentsService
   ) {
-    this.appointment = new Appointment('', '', '', '', '', '', '', '');
+    this.appointment = new Appointment('', '', '', '', '', '', '', '', '');
   }
 
   ngOnInit(): void {

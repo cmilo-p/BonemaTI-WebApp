@@ -6,7 +6,7 @@ import { MaintenancesComponent } from './components/maintenances/maintenances.co
 
 const routes: Routes = [
   { path: '', component: CalendarComponent },
-  { path: 'appointment', component: AppointmentComponent },
+  { path: 'appointment/:id', component: AppointmentComponent },
   { path: 'maintenances', component: MaintenancesComponent },
 ];
 
