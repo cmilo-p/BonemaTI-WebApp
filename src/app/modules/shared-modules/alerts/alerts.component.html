@@ -1,0 +1,17 @@
+<div class="text-center">
+
+    <h1 mat-dialog-title>
+        {{ title }}
+    </h1>
+
+    <div mat-dialog-content>
+        {{ message }}
+    </div>
+
+    <div mat- dialog-actions class="mt-3" [align]="'center'">
+        <button mat-stroked-button [type]="'button'" class="mx-2" color="warn" (click)="onNoClick()">Cerrar</button>
+        <button mat-stroked-button [type]="'button'" class="mx-2" color="primary" [mat-dialog-close]="onClick()"
+            cdkFocusInitial>Aceptar</button>
+    </div>
+
+</div>

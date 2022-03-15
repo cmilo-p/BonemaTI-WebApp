@@ -24,7 +24,8 @@
   </mat-form-field>
 
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" 
+           matTableExporter  #exporter="matTableExporter">
  
       <ng-container matColumnDef="NOMBRE FUNCIONARIO">
         <th mat-header-cell *matHeaderCellDef> NOMBRE FUNCIONARIO </th>
@@ -63,4 +64,10 @@
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of users"></mat-paginator>
   </div>
+
+  
 </div>
+
+<app-exports-btn></app-exports-btn>
+
+<button mat-button (click)="exporter.exportTable('csv')">Boton</button>

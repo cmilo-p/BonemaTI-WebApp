@@ -10,7 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
   selector: 'app-employees',
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.scss'],
-  providers: [EmployeesService]
+  providers: [EmployeesService],
 })
 export class EmployeesComponent implements AfterViewInit, OnInit {
 
