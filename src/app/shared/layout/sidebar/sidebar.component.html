@@ -1,26 +1,45 @@
+<div class="d-none d-md-block">
+    <mat-toolbar color="primary">
+        <span><img src="assets/images/logos/logo.png" alt="{{company}}" class="img-logo"
+                [routerLink]="['/home']"></span>
+    </mat-toolbar>
+</div>
+
 <mat-nav-list role="navigation">
 
-    <mat-list-item role="listitem" [routerLink]="['/home']" routerLinkActive="active">
-        Dashboard
-        <span class="spacer"></span>
+    <mat-list-item role="listitem" class="d-flex d-lg-block justify-content-center" [routerLink]="['/home']"
+        routerLinkActive="active">
+        <span class="d-none d-lg-block">
+            Dashboard
+        </span>
+        <span class="spacer d-none d-lg-block"></span>
         <mat-icon>insights</mat-icon>
     </mat-list-item>
 
-    <mat-list-item role="listitem" [routerLink]="['/calendar']" routerLinkActive="active">
-        Calendario
-        <span class="spacer"></span>
+    <mat-list-item role="listitem" class="d-flex d-lg-block justify-content-center" [routerLink]="['/calendar']"
+        routerLinkActive="active">
+        <span class="d-none d-lg-block">
+            Calendario
+        </span>
+        <span class="spacer d-none d-lg-block"></span>
         <mat-icon>today</mat-icon>
     </mat-list-item>
 
-    <mat-list-item role="listitem" [routerLink]="['/devices']" routerLinkActive="active">
-        Inventario
-        <span class="spacer"></span>
+    <mat-list-item role="listitem" class="d-flex d-lg-block justify-content-center" [routerLink]="['/devices']"
+        routerLinkActive="active">
+        <span class="d-none d-lg-block">
+            Inventario
+        </span>
+        <span class="spacer d-none d-lg-block"></span>
         <mat-icon>store</mat-icon>
     </mat-list-item>
 
-    <mat-list-item role="listitem" [routerLink]="['/config']" routerLinkActive="active">
-        configuración
-        <span class="spacer"></span>
+    <mat-list-item role="listitem" class="d-flex d-lg-block justify-content-center" [routerLink]="['/config']"
+        routerLinkActive="active">
+        <span class="d-none d-lg-block">
+            configuración
+        </span>
+        <span class="spacer d-none d-lg-block"></span>
         <mat-icon>settings</mat-icon>
     </mat-list-item>
 

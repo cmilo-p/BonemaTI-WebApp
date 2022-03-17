@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { IFiles } from 'src/app/interfaces/IFiles';
 import { AlertsComponent } from '../alerts/alerts.component';
 
@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ExportsBtnComponent {
 
-  @Output() public expt: string;
+  @Output() exportFile = new EventEmitter();
 
   public title: string;
   public message: string;
@@ -21,7 +21,6 @@ export class ExportsBtnComponent {
   constructor(public dialog: MatDialog) {
     this.title = 'Exportar el archivo';
     this.message = 'Está seguro de exportar el archivo';
-    this.expt = ''
 
     this.files = [
       { name: 'Excel', extension: 'xlsx' },
@@ -42,8 +41,9 @@ export class ExportsBtnComponent {
 
     refDialog.afterClosed().subscribe(result => {
       if (result) {
-        this.expt = result;
-        console.log(result);
+        this.exportFile.emit({
+          extFile: result
+        });
       }
     });
   }

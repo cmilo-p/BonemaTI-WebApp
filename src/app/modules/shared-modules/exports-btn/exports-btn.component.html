@@ -1,10 +1,5 @@
-<mat-card class="text-center">
-    <span *ngFor="let file of files">
-        <button mat-stroked-button type="button" class="mx-2" (click)="openDialog(file)">
-            {{ file.name }}
-        </button>
-
-        <!-- (click)="exporter.exportTable('csv')" -->
-
-    </span>
-</mat-card>
+<span *ngFor="let file of files" class="text-center">
+    <button mat-raised-button type="button" class="mx-2" (click)="openDialog(file)">
+        {{ file.name }}
+    </button>
+</span>

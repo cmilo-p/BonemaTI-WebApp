@@ -11,7 +11,6 @@ import { NgxChartModuleModule } from './modules/ngx-chart-module/ngx-chart-modul
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/layout/header/header.component';
 import { SidebarComponent } from './shared/layout/sidebar/sidebar.component';
 import { LandingPageComponent } from './shared/landing-page/landing-page.component';
 import { FooterComponent } from './shared/layout/footer/footer.component';
@@ -20,7 +19,6 @@ import { PageNotFoundComponent } from './shared/errors/page-not-found/page-not-f
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     SidebarComponent,
     LandingPageComponent,
     FooterComponent,

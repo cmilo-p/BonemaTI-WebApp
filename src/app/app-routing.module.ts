@@ -6,7 +6,7 @@ import { PageNotFoundComponent } from './shared/errors/page-not-found/page-not-f
 import { LandingPageComponent } from './shared/landing-page/landing-page.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: PageNotFoundComponent },
   { path: 'initPage', component: LandingPageComponent },
   { path: 'home', component: HomePagesComponent },
   { path: 'config', loadChildren: () => import('./pages/configuration/configuration.module').then(m => m.ConfigurationModule) },

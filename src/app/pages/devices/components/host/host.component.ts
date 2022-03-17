@@ -28,8 +28,6 @@ export class HostComponent implements OnInit {
           {
             next: (response) => {
               this.host = response.host
-              console.log(response);
-              console.log(this.host);
             },
             error: (error) => {
               console.log(error);

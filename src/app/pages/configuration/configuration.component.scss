@@ -1,0 +1,19 @@
+button {
+    width: 100%;
+    height: auto;
+}
+
+.mat-icon {
+    font-size: 42px;
+    width: 100%;
+}
+
+.bg-grad {
+    background: #44a08d; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #90a4ae, #ffffff); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #90a4ae,
+        #ffffff
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
