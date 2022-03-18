@@ -8,12 +8,27 @@ button {
     width: 100%;
 }
 
-.bg-grad {
-    background: #44a08d; /* fallback for old browsers */
+.bg-grad-btn {
+    background: #90a4ae; /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #90a4ae, #ffffff); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(
         to right,
         #90a4ae,
         #ffffff
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-grad-exitBtn {
+    color: #FAFAFA;
+    background: #b71c1c; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #b71c1c, #ffffff); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #b71c1c,
+        #b71c1c
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-img {
+    background-color: #93a6af1f;
 }

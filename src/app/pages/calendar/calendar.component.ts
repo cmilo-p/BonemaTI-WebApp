@@ -18,13 +18,12 @@ export class CalendarComponent implements OnInit {
     dateClick: this.handleDateClick.bind(this),
     events:
       [
-        { title: 'event 1', date: '2022-02-01' },
-        { title: 'event 2', date: '2022-02-02' }
+        { title: 'event 1', date: '2022-03-01' },
+        { title: 'event 2', date: '2022-03-02' }
       ]
   };
 
-  constructor(private appointmentSvc: AppointmentsService) {
-  }
+  constructor(private appointmentSvc: AppointmentsService) { }
 
   ngOnInit(): void {
 
@@ -33,8 +32,7 @@ export class CalendarComponent implements OnInit {
         next: (response) => {
           if (response) {
             this.appointments = response.appointments;
-            console.log(this.appointments)
-          }else {
+          } else {
 
           }
         },

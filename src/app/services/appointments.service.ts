@@ -39,7 +39,7 @@ export class AppointmentsService {
   delete(id: any): Observable<any> {
     let headers = new HttpHeaders().set('content-Type', 'application/json');
 
-    return this._http.put(this.url + 'appointment/' + id, { headers: headers });
+    return this._http.delete(this.url + 'appointment/' + id, { headers: headers });
   }
 
 }
