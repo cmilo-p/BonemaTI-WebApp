@@ -34,7 +34,7 @@
 
           <button mat-raised-button color="warn" [routerLink]="['/home']">
             <mat-icon>home</mat-icon>
-          </button> 
+          </button>
 
         </div>
       </div>
@@ -53,7 +53,7 @@
 </div>
 
 <div class="row">
-  <div class="col-12">
+  <div class="d-none d-lg-block">
     <table mat-table [dataSource]="dataSource" matTableExporter #exporter="matTableExporter">
 
       <ng-container matColumnDef="CÓDIGO">
@@ -99,5 +99,35 @@
 
     <mat-paginator [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of users"></mat-paginator>
 
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 d-lg-none">
+
+    <div *ngFor="let host of dataSource.data">
+      <mat-accordion>
+        <mat-expansion-panel hideToggle class="my-1">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ host.name }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-card class="border">
+            <div class="p-1"><span class="text-secondary">CÓDIGO :</span> {{ host.code }}</div>
+            <div class="p-1"><span class="text-secondary">DISPOSITIVO :</span> {{ host.tpDevice }}</div>
+            <div class="p-1"><span class="text-secondary">NOMBRE EQUIPO :</span> {{ host.name }}</div>
+            <div class="p-1"><span class="text-secondary">ASIGNADO A :</span> {{ host.employee }}</div>
+            <div class="p-1"><span class="text-secondary">UBICACIÓN :</span> {{'BONEMA'}}</div>
+            <div class="p-1"><span class="text-secondary">ESTADO :</span> {{ host.state }}</div>
+            <div class="text-center">
+              <a [routerLink]="['/devices/host/', host._id]"> Consultar </a>
+            </div>
+          </mat-card>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
   </div>
 </div>

@@ -27,7 +27,7 @@ export class NewHostComponent implements OnInit {
     private _route: ActivatedRoute,
     public dialog: MatDialog
   ) {
-    this.title_form = 'Nuevo';
+    this.title_form = 'INGRESAR HOST';
     this.isEdit = false;
 
     this.software = {

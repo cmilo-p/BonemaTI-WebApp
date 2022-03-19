@@ -1,257 +1,275 @@
-<h2>{{ title_form }}</h2>
+<div class="row">
+    <div class="col-12">
+        <h2>{{ title_form }}</h2>
+    </div>
+</div>
 
-<div class="mx-4 my-3 p-5 border shadow">
-    <form #hostForm="ngForm" (ngSubmit)="onSubmit()">
+<div class="row">
+    <div class="col-12">
+        <mat-card class="mx-4 p-5 shadow">
+            <form #hostForm="ngForm" (ngSubmit)="onSubmit()">
 
-        <!-- Generales -->
-        <div class="row">
+                <!-- Generales -->
+                <div class="row">
 
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Código</mat-label>
-                    <input matInput type="text" name="code" #code="ngModel" [(ngModel)]="host.code">
-                </mat-form-field>
-            </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Código</mat-label>
+                            <input matInput type="text" name="code" #code="ngModel" [(ngModel)]="host.code">
+                        </mat-form-field>
+                    </div>
 
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Tipo de Dispositivo</mat-label>
-                    <mat-select name="tpDevice" #tpDevice="ngModel" [(ngModel)]="host.tpDevice" required>
-                        <mat-option value="SERVIDOR">Servidor</mat-option>
-                        <mat-option value="COMPUTADOR">Computador</mat-option>
-                        <mat-option value="ALL IN ONE">All in One</mat-option>
-                        <mat-option value="PORTATIL">Portatil</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Tipo de Dispositivo</mat-label>
+                            <mat-select name="tpDevice" #tpDevice="ngModel" [(ngModel)]="host.tpDevice" required>
+                                <mat-option value="SERVIDOR">Servidor</mat-option>
+                                <mat-option value="COMPUTADOR">Computador</mat-option>
+                                <mat-option value="ALL IN ONE">All in One</mat-option>
+                                <mat-option value="PORTATIL">Portatil</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
 
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Nombre Equipo</mat-label>
-                    <input matInput type="text" name="name" #name="ngModel" [(ngModel)]="host.name" required>
-                </mat-form-field>
-            </div>
-        </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nombre Equipo</mat-label>
+                            <input matInput type="text" name="name" #name="ngModel" [(ngModel)]="host.name" required>
+                        </mat-form-field>
+                    </div>
+                </div>
 
-        <!-- Usuario del Pc -->
-        <div class="row">
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Ubicación</mat-label>
-                    <mat-select name="location" #location="ngModel" [(ngModel)]="host.location">
-                        <mat-option value="Administrativo">Administrativo</mat-option>
-                        <mat-option value="Almacén">Almacén</mat-option>
-                        <mat-option value="Bogotá">Bogotá</mat-option>
-                        <mat-option value="Cali">Cali</mat-option>
-                        <mat-option value="Laboratorio">Laboratorio</mat-option>
-                        <mat-option value="Mantenimiento">Mantenimiento</mat-option>
-                        <mat-option value="Medellin">Medellin</mat-option>
-                        <mat-option value="Recepción">Recepción</mat-option>
-                        <mat-option value="Sistemas">Sistemas</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="col-sm-10 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Asignar a</mat-label>
-                    <input matInput type="text" name="employee" #employee="ngModel" [(ngModel)]="host.employee">
-                </mat-form-field>
-            </div>
-            <div class="col-sm-2 col-lg-4">
-                <button mat-raised-button type="button" color="primary" (click)="openDialog()">
-                    <mat-icon>search</mat-icon>
-                </button>
-            </div>
-        </div>
-
-        <!-- Maquina -->
-        <div class="row">
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Serial</mat-label>
-                    <input matInput type="text" name="serial" #serial="ngModel" [(ngModel)]="host.serial">
-                </mat-form-field>
-            </div>
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Marca</mat-label>
-                    <input matInput type="text" name="marca" #marca="ngModel" [(ngModel)]="host.marca">
-                </mat-form-field>
-            </div>
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Modelo</mat-label>
-                    <input matInput type="text" name="modelo" #modelo="ngModel" [(ngModel)]="host.modelo">
-                </mat-form-field>
-            </div>
-        </div>
-
-        <hr class="p-1">
-
-        <div class="row">
-            <div class="col-sm-12 col-lg-6">
-                <mat-form-field appearance="outline">
-                    <mat-label>RAM</mat-label>
-                    <input matInput type="text" name="ram" #ram="ngModel" [(ngModel)]="host.hardware.ram">
-                </mat-form-field>
-            </div>
-            <div class="col-sm-12 col-lg-6">
-                <mat-form-field appearance="outline">
-                    <mat-label>Disco Duro</mat-label>
-                    <input matInput type="text" name="hardDisk" #hardDisk="ngModel"
-                        [(ngModel)]="host.hardware.hardDisk">
-                </mat-form-field>
-            </div>
-        </div>
-
-        <!-- Hardware -->
-        <div class="row">
-            <div class="col-sm-12 col-lg-6">
-                <mat-form-field appearance="outline">
-                    <mat-label>C.P.U</mat-label>
-                    <input matInput type="text" name="cpu" #cpu="ngModel" [(ngModel)]="host.hardware.cpu">
-                </mat-form-field>
-            </div>
-            <div class="col-sm-12 col-lg-6">
-                <mat-form-field appearance="outline">
-                    <mat-label>Generación</mat-label>
-                    <input matInput type="text" name="generation" #generation="ngModel"
-                        [(ngModel)]="host.hardware.generation">
-                </mat-form-field>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Arquitectura</mat-label>
-                    <mat-select name="architecture" #architecture="ngModel" [(ngModel)]="host.hardware.architecture"
-                        required>
-                        <mat-option value="32 Bits">32 Bits</mat-option>
-                        <mat-option value="64 Bits">64 Bits</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>BIOS</mat-label>
-                    <input matInput type="text" name="bios" #bios="ngModel" [(ngModel)]="host.hardware.bios">
-                </mat-form-field>
-            </div>
-        </div>
-
-        <hr class="p-1">
-
-        <!-- S/O -->
-        <div class="row">
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Sistema Operativo</mat-label>
-                    <input matInput type="text" name="system" #system="ngModel" [(ngModel)]="software.system.name">
-                </mat-form-field>
-            </div>
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Funcionalidad</mat-label>
-                    <input matInput type="text" name="system_functionality" #system_functionality="ngModel"
-                        [(ngModel)]="software.system.functionality">
-                </mat-form-field>
-            </div>
-            <div class="col-sm-12 col-lg-4">
-                <mat-label class="text-secondary">Estado de Licencia: </mat-label>
-                <br class="my-1">
-                <mat-radio-group name="system_license" #system_license="ngModel" [(ngModel)]="software.system.license">
-                    <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
-                    <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
-                </mat-radio-group>
-            </div>
-        </div>
-
-        <!-- Office -->
-        <div class="row">
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Office</mat-label>
-                    <mat-select name="office" #office="ngModel" [(ngModel)]="software.office.name">
-                        <mat-option value="Microsoft 365 Business">Microsoft 365 Business</mat-option>
-                        <mat-option value="Microsoft Hogar y Empresarial 2013">Microsoft Hogar y Empresarial 2013
-                        </mat-option>
-                        <mat-option value="Microsoft Office Hogar y Pequeña Empresa 2010">Microsoft Office Hogar y
-                            Pequeña Empresa 2010</mat-option>
-                        <mat-option value="No licenciado">No Licenciado</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Funcionalidad</mat-label>
-                    <input matInput type="text" name="office_functionality" #office_functionality="ngModel"
-                        [(ngModel)]="software.office.functionality">
-                </mat-form-field>
-            </div>
-            <div class="col-sm-12 col-lg-4">
-                <mat-label class="text-secondary">Estado de Licencia: </mat-label>
-                <br class="my-1">
-                <mat-radio-group name="office_license" #office_license="ngModel" [(ngModel)]="software.office.license">
-                    <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
-                    <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
-                </mat-radio-group>
-            </div>
-        </div>
-
-        <!-- Antivirus -->
-        <div class="row">
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Antivirus</mat-label>
-                    <mat-select name="antivirus" #antivirus="ngModel" [(ngModel)]="software.antivirus.name">
-                        <mat-option value="Avast Free">Avast Free</mat-option>
-                        <mat-option value="Kaspersky - 5 nodos">Kaspersky - 5 nodos</mat-option>
-                        <mat-option value="Kaspersky - 21 nodos">Kaspersky - 21 nodos</mat-option>
-                        <mat-option value="McAffe">McAffe</mat-option>
-                        <mat-option value="Windows Defender">Windows Defender</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="col-sm-12 col-lg-4">
-                <mat-form-field appearance="outline">
-                    <mat-label>Funcionalidad</mat-label>
-                    <input matInput type="text" name="antivirus_functionality" #antivirus_functionality="ngModel"
-                        [(ngModel)]="software.antivirus.functionality">
-                </mat-form-field>
-            </div>
-            <div class="col-sm-12 col-lg-4">
-                <mat-label class="text-secondary">Estado de Licencia: </mat-label>
-                <br class="my-1">
-                <mat-radio-group name="antivirus_license" #antivirus_license="ngModel"
-                    [(ngModel)]="software.antivirus.license">
-                    <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
-                    <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
-                </mat-radio-group>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12">
-                <nav class="bg-light border text-center pf-m">
-                    <button mat-icon-button type="submit" class="m-2">
-                        <mat-icon class="text-secondary">save</mat-icon>
-                    </button>
-                    <br>
-                    <div *ngIf="isEdit then thenBlock; else elseBlock"></div>
-                    <ng-template #thenBlock>
-                        <button mat-icon-button type="reset" class="m-2" [routerLink]="['/devices/host', host._id]">
-                            <mat-icon color="warn">cancel</mat-icon>
+                <!-- Usuario del Pc -->
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Ubicación</mat-label>
+                            <mat-select name="location" #location="ngModel" [(ngModel)]="host.location">
+                                <mat-option value="Administrativo">Administrativo</mat-option>
+                                <mat-option value="Almacén">Almacén</mat-option>
+                                <mat-option value="Bogotá">Bogotá</mat-option>
+                                <mat-option value="Cali">Cali</mat-option>
+                                <mat-option value="Laboratorio">Laboratorio</mat-option>
+                                <mat-option value="Mantenimiento">Mantenimiento</mat-option>
+                                <mat-option value="Medellin">Medellin</mat-option>
+                                <mat-option value="Recepción">Recepción</mat-option>
+                                <mat-option value="Sistemas">Sistemas</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-10 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Asignar a</mat-label>
+                            <input matInput type="text" name="employee" #employee="ngModel" [(ngModel)]="host.employee">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-2 col-lg-4">
+                        <button mat-raised-button type="button" color="primary" (click)="openDialog()">
+                            <mat-icon>search</mat-icon>
                         </button>
-                    </ng-template>
-                    <ng-template #elseBlock>
-                        <button mat-icon-button type="reset" class="m-2" [routerLink]="['/devices/']">
-                            <mat-icon color="warn">cancel</mat-icon>
-                        </button>
-                    </ng-template>
-                </nav>
-            </div>
-        </div>
+                    </div>
+                </div>
 
-    </form>
+                <!-- Maquina -->
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Serial</mat-label>
+                            <input matInput type="text" name="serial" #serial="ngModel" [(ngModel)]="host.serial">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Marca</mat-label>
+                            <input matInput type="text" name="marca" #marca="ngModel" [(ngModel)]="host.marca">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Modelo</mat-label>
+                            <input matInput type="text" name="modelo" #modelo="ngModel" [(ngModel)]="host.modelo">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <hr class="p-1">
+
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>RAM</mat-label>
+                            <input matInput type="text" name="ram" #ram="ngModel" [(ngModel)]="host.hardware.ram">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-lg-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Disco Duro</mat-label>
+                            <input matInput type="text" name="hardDisk" #hardDisk="ngModel"
+                                [(ngModel)]="host.hardware.hardDisk">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!-- Hardware -->
+                <div class="row">
+                    <div class="col-sm-12 col-lg-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>C.P.U</mat-label>
+                            <input matInput type="text" name="cpu" #cpu="ngModel" [(ngModel)]="host.hardware.cpu">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-lg-6">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Generación</mat-label>
+                            <input matInput type="text" name="generation" #generation="ngModel"
+                                [(ngModel)]="host.hardware.generation">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Arquitectura</mat-label>
+                            <mat-select name="architecture" #architecture="ngModel"
+                                [(ngModel)]="host.hardware.architecture" required>
+                                <mat-option value="32 Bits">32 Bits</mat-option>
+                                <mat-option value="64 Bits">64 Bits</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>BIOS</mat-label>
+                            <input matInput type="text" name="bios" #bios="ngModel" [(ngModel)]="host.hardware.bios">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <hr class="p-1">
+
+                <!-- S/O -->
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Sistema Operativo</mat-label>
+                            <input matInput type="text" name="system" #system="ngModel"
+                                [(ngModel)]="software.system.name">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Funcionalidad</mat-label>
+                            <input matInput type="text" name="system_functionality" #system_functionality="ngModel"
+                                [(ngModel)]="software.system.functionality">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-label class="text-secondary">Estado de Licencia: </mat-label>
+                        <br class="my-1">
+                        <mat-radio-group name="system_license" #system_license="ngModel"
+                            [(ngModel)]="software.system.license">
+                            <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
+                            <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+
+                <!-- Office -->
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Office</mat-label>
+                            <mat-select name="office" #office="ngModel" [(ngModel)]="software.office.name">
+                                <mat-option value="Microsoft 365 Business">Microsoft 365 Business</mat-option>
+                                <mat-option value="Microsoft Hogar y Empresarial 2013">Microsoft Hogar y Empresarial
+                                    2013
+                                </mat-option>
+                                <mat-option value="Microsoft Office Hogar y Pequeña Empresa 2010">Microsoft Office
+                                    Hogar y
+                                    Pequeña Empresa 2010</mat-option>
+                                <mat-option value="No licenciado">No Licenciado</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Funcionalidad</mat-label>
+                            <input matInput type="text" name="office_functionality" #office_functionality="ngModel"
+                                [(ngModel)]="software.office.functionality">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-label class="text-secondary">Estado de Licencia: </mat-label>
+                        <br class="my-1">
+                        <mat-radio-group name="office_license" #office_license="ngModel"
+                            [(ngModel)]="software.office.license">
+                            <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
+                            <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+
+                <!-- Antivirus -->
+                <div class="row">
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Antivirus</mat-label>
+                            <mat-select name="antivirus" #antivirus="ngModel" [(ngModel)]="software.antivirus.name">
+                                <mat-option value="Avast Free">Avast Free</mat-option>
+                                <mat-option value="Kaspersky - 5 nodos">Kaspersky - 5 nodos</mat-option>
+                                <mat-option value="Kaspersky - 21 nodos">Kaspersky - 21 nodos</mat-option>
+                                <mat-option value="McAffe">McAffe</mat-option>
+                                <mat-option value="Windows Defender">Windows Defender</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Funcionalidad</mat-label>
+                            <input matInput type="text" name="antivirus_functionality"
+                                #antivirus_functionality="ngModel" [(ngModel)]="software.antivirus.functionality">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-lg-4">
+                        <mat-label class="text-secondary">Estado de Licencia: </mat-label>
+                        <br class="my-1">
+                        <mat-radio-group name="antivirus_license" #antivirus_license="ngModel"
+                            [(ngModel)]="software.antivirus.license">
+                            <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
+                            <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="bg-light text-center border nav-position">
+
+                            <button mat-icon-button type="submit" class="m-2">
+                                <mat-icon class="text-secondary">save</mat-icon>
+                            </button>
+
+                            <div *ngIf="isEdit then thenBlock; else elseBlock"></div>
+
+                            <ng-template #thenBlock>
+                                <button mat-icon-button type="reset" class="m-2"
+                                    [routerLink]="['/devices/host', host._id]">
+                                    <mat-icon color="warn">cancel</mat-icon>
+                                </button>
+                            </ng-template>
+
+                            <ng-template #elseBlock>
+                                <button mat-icon-button type="reset" class="m-2" [routerLink]="['/devices/']">
+                                    <mat-icon color="warn">cancel</mat-icon>
+                                </button>
+                            </ng-template>
+
+                        </nav>
+                    </div>
+                </div>
+
+            </form>
+        </mat-card>
+    </div>
 </div>
