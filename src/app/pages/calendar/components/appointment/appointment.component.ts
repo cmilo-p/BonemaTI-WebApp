@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Appointment } from 'src/app/models/Appointment';
 import { AppointmentsService } from 'src/app/services/appointments.service';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-appointment',
@@ -11,13 +13,15 @@ import { AppointmentsService } from 'src/app/services/appointments.service';
 export class AppointmentComponent implements OnInit {
 
   public appointment: Appointment;
-
-  public selected!: Date | null;
+  public isEdit: boolean;
 
   constructor(
     private appointmentSvc: AppointmentsService,
-    private _route: ActivatedRoute) {
+    private _rt: Router,
+    private _route: ActivatedRoute,
+    private _snackBar: MatSnackBar) {
     this.appointment = new Appointment('', '', '', '', '', '', '', '', '');
+    this.isEdit = true;
   }
 
   ngOnInit(): void {
@@ -34,11 +38,30 @@ export class AppointmentComponent implements OnInit {
             }
           }
         );
-      });
+      }
+    );
   }
 
-  initDate(date: Date) {
-    date.getMonth()
+  delete() {
+    this.appointmentSvc.delete(this.appointment._id).subscribe(
+      {
+        next: (response) => {
+          console.log(response);
+          //this.openSnackBar('Usuario Creado!', 'Cerrar');
+        },
+        error: (error) => {
+          console.log(error);
+          //this.openSnackBar(response.message, 'Cerrar');
+          console.warn(error);
+          
+
+        }
+      }
+    );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
 }

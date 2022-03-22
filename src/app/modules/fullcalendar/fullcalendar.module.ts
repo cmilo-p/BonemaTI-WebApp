@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular'; 
-import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
 
 FullCalendarModule.registerPlugins([ 
-  interactionPlugin,
-  dayGridPlugin
+  dayGridPlugin,
+  timeGridPlugin,
+  listPlugin,
+  interactionPlugin
 ]);
 
 @NgModule({

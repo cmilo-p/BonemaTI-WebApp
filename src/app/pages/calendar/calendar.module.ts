@@ -11,6 +11,7 @@ import { CalendarComponent } from './calendar.component';
 import { AppointmentsComponent } from './components/appointments/appointments.component';
 import { MaintenancesComponent } from './components/maintenances/maintenances.component';
 import { AppointmentComponent } from './components/appointment/appointment.component';
+import { NewAppointmentComponent } from './components/appointment/new-appointment/new-appointment.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { AppointmentComponent } from './components/appointment/appointment.compo
     CalendarComponent,
     AppointmentsComponent,
     MaintenancesComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    NewAppointmentComponent
   ],
   imports: [
     CommonModule,

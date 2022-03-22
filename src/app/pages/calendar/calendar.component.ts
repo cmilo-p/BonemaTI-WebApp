@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/angular';
 import { Appointment } from 'src/app/models/Appointment';
 import { AppointmentsService } from 'src/app/services/appointments.service';
+import { CalendarOptions, DateSelectArg, EventClickArg, EventApi, CalendarApi } from '@fullcalendar/angular';
+
+import { MatDialog } from '@angular/material/dialog';
+import { NewAppointmentComponent } from './components/appointment/new-appointment/new-appointment.component';
 
 @Component({
   selector: 'app-calendar',
@@ -12,28 +15,54 @@ import { AppointmentsService } from 'src/app/services/appointments.service';
 export class CalendarComponent implements OnInit {
 
   public appointments!: Appointment[];
+  //public appointment : Appointment;
+  public eventos!: any[];
 
-  public calendarOptions: CalendarOptions = {
+  calendarVisible = true;
+  calendarOptions: CalendarOptions = {
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+    },
     initialView: 'dayGridMonth',
-    dateClick: this.handleDateClick.bind(this),
-    events:
-      [
-        { title: 'event 1', date: '2022-03-01' },
-        { title: 'event 2', date: '2022-03-02' }
-      ]
+    weekends: true,
+    editable: true,
+    selectable: true,
+    selectMirror: true,
+    dayMaxEvents: true,
+    select: this.handleDateSelect.bind(this),
+    eventClick: this.handleEventClick.bind(this),
+    eventsSet: this.handleEvents.bind(this)
   };
+  currentEvents: EventApi[] = [];
 
-  constructor(private appointmentSvc: AppointmentsService) { }
+  constructor(
+    private appointmentSvc: AppointmentsService,
+    public dialog: MatDialog) {
+    //this.appointment = new Appointment('','','','','','','','','');
+    this.eventos = []
+  }
 
   ngOnInit(): void {
-
     this.appointmentSvc.getAppointments().subscribe(
       {
         next: (response) => {
           if (response) {
             this.appointments = response.appointments;
+            this.appointments.forEach(dataCall => {
+              let date = new Date(dataCall.date_appointment).toISOString().replace(/T.*$/, '');
+              this.eventos.push(
+                {
+                  title: dataCall.employee,
+                  start: date,
+                  end: date,
+                }
+              );
+            });
+            this.calendarOptions.events = this.eventos;
           } else {
-
+            console.log(response);
           }
         },
         error: (error) => {
@@ -41,20 +70,67 @@ export class CalendarComponent implements OnInit {
         }
       }
     );
-
   }
 
-  handleDateClick(arg: any) {
-    alert('date click! ' + arg.dateStr)
-  }
+  handleDateSelect(selectInfo: DateSelectArg) {
 
-  /*   evento() {
-      this.data.forEach(element => {
-        let ISOfecha = new Date(element.date_appointment);
-        let fecha = ISOfecha.getFullYear() + '-' + '0' +ISOfecha.getMonth() + '-' + '0' + ISOfecha.getDay()
-  
-        this.eventos.push({ title: element.tpMaintenance, date: fecha })
+    this.openDialog();
+
+
+
+    /* this.appointmentSvc.create().subscribe(
+      {
+
+      }
+    ); */
+
+
+    /* const title = prompt('Please enter a new title for your event');
+    const calendarApi = selectInfo.view.calendar;
+    
+    calendarApi.unselect(); // clear date selection
+    
+    if (title) {
+      calendarApi.addEvent({
+        id: '12345',
+        title,
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+        allDay: selectInfo.allDay
       });
     } */
+  }
+  
+  handleWeekendsToggle() {
+    const { calendarOptions } = this;
+    calendarOptions.weekends = !calendarOptions.weekends;
+  }
+
+  handleEventClick(clickInfo: EventClickArg) {
+    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+      clickInfo.event.remove();
+    }
+  }
+
+  handleEvents(events: EventApi[]) {
+    this.currentEvents = events;
+  }
+
+
+  /* Dialog */
+  openDialog() {
+
+    const refDialog = this.dialog.open(NewAppointmentComponent);
+
+    refDialog.afterClosed().subscribe(result => {
+      if (result) {
+        
+        /* Datas devuelto del Dialog */
+
+      }
+    });
+  }
+
+
 
 }
