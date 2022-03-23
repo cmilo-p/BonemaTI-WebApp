@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DevicesService } from 'src/app/services/devices.service';
 import { Device } from 'src/app/models/Devices';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-host',
   templateUrl: './host.component.html',
@@ -11,46 +13,62 @@ import { Device } from 'src/app/models/Devices';
 })
 export class HostComponent implements OnInit {
 
+  /* Inicializar el host */
   public host!: Device;
 
   constructor(
     private deviceSvc: DevicesService,
     private _rt: Router,
-    private _route: ActivatedRoute
-  ) { }
+    private _route: ActivatedRoute,
+    private _snackBar: MatSnackBar
+  ) {
+    /* Inicializar el host */
+   }
 
   ngOnInit(): void {
-    this._route.params.subscribe(
-      params => {
-        let id = params['id'];
+    this._route.params.subscribe(params => {
 
-        this.deviceSvc.getHost(id).subscribe(
-          {
-            next: (response) => {
+      let id = params['id'];
+
+      this.deviceSvc.getHost(id).subscribe(
+        {
+          next: (response) => {
+            if (response.host) {
               this.host = response.host
-            },
-            error: (error) => {
-              console.log(error);
+            } else {
+              this.openSnackBar(response.message, 'Cerrar');
+              console.warn(response);
             }
+          },
+          error: (error) => {
+            this._rt.navigate(['/devices']);
+            this.openSnackBar('Error al obtener los dispositivos', 'Cerrar');
+            console.warn(error);
           }
-        );
-      }
-    );
+        }
+      );
+
+    });
   }
 
   delete(id: any) {
     this.deviceSvc.delete(id).subscribe(
       {
         next: (response) => {
-          console.log(response);
           this._rt.navigate(['/devices']);
+          this.openSnackBar('Dispositivo Eliminado!', 'Cerrar');
         },
         error: (error) => {
-          console.log(error);
           this._rt.navigate(['/devices/host', id]);
+          this.openSnackBar('Error al eliminar el dispositivo', 'Cerrar');
+          console.warn(error);
         }
       }
-    )
+    );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
 }

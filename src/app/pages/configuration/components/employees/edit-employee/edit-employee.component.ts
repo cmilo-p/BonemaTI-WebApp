@@ -66,7 +66,6 @@ export class EditEmployeeComponent implements OnInit {
             if (response.employee) {
               this.employee = response.employee;
             } else {
-              this._rt.navigate(['/config/employees']);
               this.openSnackBar(response.message, 'Cerrar');
               console.warn(response);
             }

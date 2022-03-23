@@ -5,91 +5,153 @@
     </div>
 </div>
 
+<button mat-raised-button (click)="desbloquear()">
+    desbloquear
+</button>
+
 <div class="row">
     <div class="col-12">
         <mat-card class="border">
-            <form #dtaForm="ngForm">
+            <form #appointmentForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
 
                 <div class="row">
                     <div class="col">
+                        <mat-form-field appearance="fill" *ngIf="!isEdit">
+                            <mat-label>Fecha Agendamiento</mat-label>
 
-                        <!-- <mat-form-field appearance="fill">
-                            <mat-label>Choose a date</mat-label>
-                            <input matInput type="text" value="{{ appointment.date_appointment | date }}" [readonly]="isEdit">
-                            <input matInput [matDatepicker]="picker" [readonly]="!isEdit">
+                            <input matInput [matDatepicker]="picker" name="date_appointment" #date_appointment="ngModel"
+                                [(ngModel)]="appointment.date_appointment" required>
+
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field> -->
-
-
-                        <mat-form-field appearance="outline">
-                            <input matInput type="text" value="{{ appointment.date_appointment | date }}" [readonly]="isEdit">
-                            <mat-label>Fecha Agendamiento</mat-label>
                         </mat-form-field>
-                        
+
+                        <mat-form-field appearance="fill" *ngIf="isEdit">
+                            <mat-label>Fecha Agendamiento</mat-label>
+
+                            <input matInput [matDatepicker]="picker" name="date_appointment" #date_appointment="ngModel"
+                                [(ngModel)]="appointment.date_appointment" required>
+
+                            <mat-datepicker-toggle matSuffix [for]="picker" disabled="{{desq}}"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col">
+                    <div class="col-sm-12 col-xl-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Tipo de Mantenimiento</mat-label>
-                            <mat-select *ngIf="!isEdit">
+
+                            <mat-select name="tpMaintenance" #tpMaintenance="ngModel"
+                                [(ngModel)]="appointment.tpMaintenance" [disabled]="desq" required>
                                 <mat-option value="Hardware">Hardware</mat-option>
                                 <mat-option value="Software">Software</mat-option>
                             </mat-select>
-                            <input matInput type="text" *ngIf="isEdit" value="{{appointment.tpMaintenance}}" readonly>
+
+                            <input matInput type="text" *ngIf="isEdit" name="tpMaintenance" #tpMaintenance="ngModel"
+                                [(ngModel)]="appointment.tpMaintenance" [readonly]="desq" required>
                         </mat-form-field>
                     </div>
-                    <div class="col">
+
+                    <div class="col-sm-12 col-xl-6">
                         <mat-form-field appearance="outline">
                             <mat-label>Soporté Asignado</mat-label>
-                            <mat-select *ngIf="!isEdit">
+
+                            <mat-select *ngIf="!isEdit" name="support_tec" #support_tec="ngModel"
+                                [(ngModel)]="appointment.support_tec" required>
                                 <mat-option value="Camilo Pinzón">Camilo Pinzón</mat-option>
                                 <mat-option value="Sebastian Rojas">Sebastian Rojas</mat-option>
                                 <mat-option value="Mauricio Ospina">Mauricio Ospina</mat-option>
                             </mat-select>
-                            <input matInput type="text" *ngIf="isEdit" value="{{appointment.support_tec}}"
-                                [readonly]="isEdit">
+
+                            <input matInput type="text" *ngIf="isEdit" name="support_tec" #support_tec="ngModel"
+                                [(ngModel)]="appointment.support_tec" readonly required>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-12 col-xl-6" *ngIf="!isEdit">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Funcionario</mat-label>
+
+                            <mat-select name="employee" #employee="ngModel" [(ngModel)]="appointment.employee" required>
+                                <mat-option value="Angelica Jaimes">Angelica Jaimes</mat-option>
+                                <mat-option value="Sistemas">Sistemas</mat-option>
+                                <mat-option value="Sebastian Rojas">Sebastian Rojas</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm-12 col-xl-6" *ngIf="!isEdit">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Equipo</mat-label>
+
+                            <mat-select name="host" #host="ngModel" [(ngModel)]="appointment.host" required>
+                                <mat-option value="SERVIDOR">SERVIDOR</mat-option>
+                                <mat-option value="LAB-LIQUIDOS">LAB-LIQUIDOS</mat-option>
+                                <mat-option value="AUX-SISTEMAS">AUX-SISTEMAS</mat-option>
+                                <mat-option value="AUX-SISTEMAS-2">AUX-SISTEMAS-2</mat-option>
+                            </mat-select>
                         </mat-form-field>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12" *ngIf="isEdit">
                         <mat-form-field appearance="outline">
                             <mat-label>Procedimientos</mat-label>
-                            <textarea matInput type="text" value="{{appointment.procedures}}"
-                                [readonly]="isEdit"></textarea>
+
+                            <textarea matInput type="text" name="procedures" #procedures="ngModel"
+                                [(ngModel)]="appointment.procedures" readonly></textarea>
                         </mat-form-field>
                     </div>
+
                     <div class="col-12">
                         <mat-form-field appearance="outline">
                             <mat-label>Observaciones</mat-label>
-                            <textarea matInput type="text" value="{{appointment.observations}}"
-                                [readonly]="isEdit"></textarea>
+
+                            <textarea matInput type="text" name="observations" #observations="ngModel"
+                                [(ngModel)]="appointment.observations" [readonly]="isEdit"></textarea>
                         </mat-form-field>
                     </div>
                 </div>
 
                 <mat-form-field *ngIf="isEdit" appearance="outline" class="text-center">
                     <mat-label>Estado</mat-label>
-                    <input matInput type="text" value="{{appointment.status | uppercase}}" [readonly]="isEdit">
+
+                    <input matInput type="text" name="status" #status="ngModel" [(ngModel)]="appointment.status"
+                        readonly>
                 </mat-form-field>
 
-                <div>
-                    <button mat-raised-button class="mx-1" [routerLink]="['/calendar']">
-                        <mat-icon>arrow_back</mat-icon>
-                    </button>
-                    <button mat-raised-button *ngIf="!isEdit" class="mx-1" color="primary">
-                        <mat-icon>save</mat-icon>
-                    </button>
-                    <button mat-raised-button *ngIf="isEdit" class="mx-1" color="accent">
-                        <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-raised-button *ngIf="isEdit" class="mx-1" color="warn" (click)="delete()">
-                        <mat-icon>delete</mat-icon>
-                    </button>
+                <div class="row">
+                    <div class="col">
+                        <div class="my-3">
+
+                            <button mat-raised-button type="button" class="mx-1" (click)="onNoClick()"
+                                [routerLink]="['/calendar']">
+                                <mat-icon>arrow_back</mat-icon>
+                            </button>
+
+                            <button mat-raised-button type="submit" *ngIf="!isEdit" class="mx-1" color="primary">
+                                <mat-icon>save</mat-icon>
+                            </button>
+
+                            <button mat-raised-button type="submit" *ngIf="isEdit" class="mx-1" color="accent">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+
+                            <button mat-raised-button type="button" *ngIf="isEdit" class="mx-1" color="warn"
+                                (click)="delete(this.appointment._id)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+
+                        </div>
+                    </div>
                 </div>
 
             </form>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { Device, Hardware } from 'src/app/models/Devices';
 import { DevicesService } from 'src/app/services/devices.service';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EmployeesComponent } from 'src/app/pages/configuration/components/employees/employees.component';
 
@@ -24,7 +25,7 @@ export class NewHostComponent implements OnInit {
   constructor(
     private deviceSvc: DevicesService,
     private _rt: Router,
-    private _route: ActivatedRoute,
+    private _snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {
     this.title_form = 'INGRESAR HOST';
@@ -36,7 +37,7 @@ export class NewHostComponent implements OnInit {
       antivirus: { name: '', functionality: '', license: '' },
     }
     this.hardware = new Hardware('', '', '', '', '', '');
-    this.host = new Device('','', '', '', '', '', '', '', '', this.hardware, this.software, '', true, null);
+    this.host = new Device('', '', '', '', '', '', '', '', '', this.hardware, this.software, '', true, null);
   }
 
   ngOnInit(): void {
@@ -46,25 +47,33 @@ export class NewHostComponent implements OnInit {
     this.deviceSvc.create(this.host).subscribe(
       {
         next: (response) => {
-          this._rt.navigate(['/devices/']);
-          console.log(response);
+          if (response.status == 'success') {
+            this._rt.navigate(['/devices/host', response.host._id]);
+            this.openSnackBar('Dispositivo Creado!', 'Cerrar');
+          } else {
+            this.openSnackBar(response.message, 'Cerrar');
+            console.warn(response);
+          }
         },
         error: (error) => {
-          console.log(error);
+          this._rt.navigate(['/devices']);
+          this.openSnackBar('Error al crear el dispositivo', 'Cerrar');
+          console.warn(error);
         }
       }
     );
   }
 
+  /* Implementar Dialogo */
   openDialog() {
     const dialogRef = this.dialog.open(EmployeesComponent);
-
-    
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+  }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
 }

@@ -4,6 +4,7 @@ import { Device, Hardware } from 'src/app/models/Devices';
 import { DevicesService } from 'src/app/services/devices.service';
 
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { EmployeesComponent } from 'src/app/pages/configuration/components/employees/employees.component';
 
 @Component({
@@ -26,7 +27,8 @@ export class EditHostComponent implements OnInit {
     private deviceSvc: DevicesService,
     private _rt: Router,
     private _route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar
   ) {
     this.title_form = 'Editado';
     this.status = '';
@@ -38,7 +40,7 @@ export class EditHostComponent implements OnInit {
       antivirus: { name: '', functionality: '', license: '' },
     }
     this.hardware = new Hardware('', '', '', '', '', '');
-    this.host = new Device('','', '', '', '', '', '', '', '', this.hardware, this.software, '', true, null);
+    this.host = new Device('', '', '', '', '', '', '', '', '', this.hardware, this.software, '', true, null);
   }
 
   ngOnInit(): void {
@@ -46,11 +48,10 @@ export class EditHostComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.deviceSvc.update(this.host._id, this.host).subscribe(
       {
         next: (response) => {
-          if(response.status == 'success') {
+          if (response.status == 'success') {
             this.status = response.status;
             this.host = response.hostUpdate;
 
@@ -69,15 +70,12 @@ export class EditHostComponent implements OnInit {
     );
   }
 
+  /* Implemenar */
   openDialog() {
     const dialogRef = this.dialog.open(EmployeesComponent);
-
-    
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
-
   }
 
   getHost() {
@@ -88,20 +86,26 @@ export class EditHostComponent implements OnInit {
       this.deviceSvc.getHost(id).subscribe(
         {
           next: (response) => {
-            if(response.host) {
+            if (response.host) {
               this.host = response.host;
             } else {
-              this._rt.navigate(['/devices']);  
+              this.openSnackBar(response.message, 'Cerrar');
+              console.warn(response);
             }
           },
           error: (error) => {
-            console.log(error);
             this._rt.navigate(['/devices']);
+            this.openSnackBar('Error al obtener los dispositivos', 'Cerrar');
+            console.warn(error);
           }
         }
-      )
+      );
 
     });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
 }
