@@ -3,7 +3,6 @@ import { Device } from 'src/app/models/Devices';
 import { DevicesService } from 'src/app/services/devices.service';
 import { Appointment } from 'src/app/models/Appointment';
 import { AppointmentsService } from 'src/app/services/appointments.service';
-import { Employee } from 'src/app/models/Employee';
 
 @Component({
   selector: 'app-maintenances',
@@ -16,21 +15,20 @@ import { Employee } from 'src/app/models/Employee';
 })
 export class MaintenancesComponent implements OnInit {
 
-  public hostsName: Array<string> = [];
-  public employeeName: Array<string> = [];
+  public appoimentGroup: Array<any> = [];
 
   public hosts!: Device[];
   public appointment: Appointment;
 
   constructor(
-    private employeeSvc: DevicesService,
+    private hostSvc: DevicesService,
     private appointmentSvc: AppointmentsService
   ) {
     this.appointment = new Appointment('', '', '', '', '', '', '', '', '');
   }
 
   ngOnInit(): void {
-    this.employeeSvc.getHosts().subscribe(
+    this.hostSvc.getHosts().subscribe(
       {
         next: (response) => {
           this.hosts = response.hosts;
@@ -43,48 +41,53 @@ export class MaintenancesComponent implements OnInit {
   }
 
   onSubmit() {
+    this.appoimentGroup.forEach(element => {
 
-    for(let i = 0; i <= this.hostsName.length; i++){
+      this.appointment.date_appointment = element.date_appointment;
+      this.appointment.host = element.host;
+      this.appointment.employee = element.employee;
 
-      this.hostsName.forEach(host => {
-        this.appointment.host = host;
-      });
-
-      this.employeeName.forEach(employee => {
-        this.appointment.employee = employee;
-      });
-
-      console.log(this.appointment);
-      
-    }
-
-    
-
-   
-
-/*     this.appointmentSvc.create(this.appointment).subscribe(
-      {
-        next:(response) => {
-
+      this.appointmentSvc.create(this.appointment).subscribe({
+        next: (response) => {
+          console.log(response);
         },
-        error:(error) => {
+        error: (error) => {
           console.log(error);
         }
-      }
-    ); */
+      });
+
+    });
   }
 
-  dataCheck(event: any, host: any) {
-    if (event.checked == true) {
-      this.hostsName.push(host.name);
-      this.employeeName.push(host.employee);
-    } else {
-      let host_pos = this.hostsName.indexOf(host.name);
-      let employee_pos = this.employeeName.indexOf(host.employee);
+  dataAppointmentGroup(event: any, id: any, host: any, date: any) {
+    let findData = this.appoimentGroup.find(element => element.id == id);
 
-      this.hostsName.splice(host_pos, 1);
-      this.employeeName.splice(employee_pos, 1);
+    if (findData == undefined) {
+      this.appoimentGroup.push(
+        {
+          id: id,
+          date_appointment: date.value,
+          host: host.name,
+          employee: host.employee,
+        }
+      );
+    } else {
+      let positionHost = this.appoimentGroup.indexOf(findData);
+      this.appoimentGroup.splice(positionHost, 1);
+
+      if (date.value !== '') {
+        this.appoimentGroup.push(
+          {
+            id: id,
+            date_appointment: date.value,
+            host: host.name,
+            employee: host.employee,
+          }
+        );
+      }
+
     }
+
   }
 
 }
