@@ -38,7 +38,7 @@ export class EmployeesComponent implements AfterViewInit, OnInit {
           this.dataSource.data = response.employees;
         },
         error: (error) => {
-          console.log(error);
+          console.error(error);
         }
       }
     );

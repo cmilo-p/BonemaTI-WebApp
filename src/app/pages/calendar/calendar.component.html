@@ -1,6 +1,6 @@
 <div class="row">
 
-    <div class="col-sm-8 col-lg-10" >
+    <div class="col-sm-8 col-lg-9">
         <mat-accordion class="headers-align">
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -62,14 +62,22 @@
         </mat-accordion>
     </div>
 
-    <div class="col-sm-4 col-lg-2">
+    <div class="col-sm-4 col-lg-3">
         <div class="d-flex justify-content-center my-2">
-            <button mat-raised-button class="mx-2" color="primary" [routerLink]="['/calendar/maintenances']">
+
+            <button mat-raised-button class="mx-2" [matMenuTriggerFor]="menu">Menu</button>
+            <mat-menu #menu="matMenu" xPosition="after">
+                <button mat-menu-item [routerLink]="['/calendar/maintenances']">Agenda Global</button>
+                <button mat-menu-item [routerLink]="['/calendar/']">Nueva Cita</button>
+            </mat-menu>
+
+            <button mat-raised-button class="mx-2" color="primary" >
                 <mat-icon>add_circle_outline</mat-icon>
             </button>
             <button mat-raised-button class="mx-2" color="warn" [routerLink]="['/home']">
                 <mat-icon>home</mat-icon>
             </button>
+
         </div>
     </div>
 

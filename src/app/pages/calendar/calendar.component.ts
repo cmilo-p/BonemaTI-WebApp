@@ -39,7 +39,8 @@ export class CalendarComponent implements OnInit {
 
   constructor(
     private appointmentSvc: AppointmentsService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog
+    ) {
     //this.appointment = new Appointment('','','','','','','','','');
     this.eventos = []
   }
@@ -73,32 +74,7 @@ export class CalendarComponent implements OnInit {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-
     this.openDialog();
-
-
-
-    /* this.appointmentSvc.create().subscribe(
-      {
-
-      }
-    ); */
-
-
-    /* const title = prompt('Please enter a new title for your event');
-    const calendarApi = selectInfo.view.calendar;
-    
-    calendarApi.unselect(); // clear date selection
-    
-    if (title) {
-      calendarApi.addEvent({
-        id: '12345',
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      });
-    } */
   }
   
   handleWeekendsToggle() {
@@ -107,9 +83,7 @@ export class CalendarComponent implements OnInit {
   }
 
   handleEventClick(clickInfo: EventClickArg) {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove();
-    }
+
   }
 
   handleEvents(events: EventApi[]) {

@@ -13,10 +13,11 @@
 
           <div class="row">
 
-            <div class="col-6">
+            <div class="col-sm-12 col-lg-6">
               <mat-form-field appearance="outline">
                 <mat-label>Tipo de Mantenimiento</mat-label>
-                <mat-select name="tpMaintenance" tpMaintenance="ngModel" [(ngModel)]="appointment.tpMaintenance" required>
+                <mat-select name="tpMaintenance" tpMaintenance="ngModel" [(ngModel)]="appointment.tpMaintenance"
+                  required>
                   <mat-option>Seleccionar</mat-option>
                   <mat-option value="Hardware">Hardware</mat-option>
                   <mat-option value="Software">Software</mat-option>
@@ -24,14 +25,13 @@
               </mat-form-field>
             </div>
 
-            <div class="col-6">
+            <div class="col-sm-12 col-lg-6">
               <mat-form-field appearance="outline">
                 <mat-label>Soporté Asignado</mat-label>
                 <mat-select name="support_tec" support_tec="ngModel" [(ngModel)]="appointment.support_tec" required>
-                  <mat-option>Seleccionar</mat-option>
-                  <mat-option value="Camilo Pinzón">Camilo Pinzón</mat-option>
-                  <mat-option value="Sebastian Rojas">Sebastian Rojas</mat-option>
-                  <mat-option value="Mauricio Ospina">Mauricio Ospina</mat-option>
+                  <div *ngFor="let user of users">
+                    <mat-option value="{{user.name}}">{{user.name}}</mat-option>
+                  </div>
                 </mat-select>
               </mat-form-field>
             </div>
@@ -42,19 +42,19 @@
             <cdk-virtual-scroll-viewport class="example-viewport" itemSize="60">
               <dl class="example-dl row p-4">
                 <ng-container #host *cdkVirtualFor="let host of hosts; let i = index">
-                  <div class="col-4">
+                  <div class="col-sm-12 col-md-6 col-lg-4">
                     <mat-card class="m-1 border">
-  
+
                       <div class="my-1">
                         <span class="text-primary">{{ host.name }}</span>
                         {{ host.employee }}
                       </div>
-  
+
                       <mat-form-field appearance="outline" (change)="dataAppointmentGroup($event, i, host, date)">
                         <mat-label>Fecha Agenamiento</mat-label>
                         <input matInput type="date" #date>
                       </mat-form-field>
-  
+
                     </mat-card>
                   </div>
                 </ng-container>

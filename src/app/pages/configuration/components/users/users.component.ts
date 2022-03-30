@@ -36,7 +36,7 @@ export class UsersComponent implements AfterViewInit, OnInit {
           this.dataSource.data = response.users;
         },
         error: (error) => {
-          console.log(error);
+          console.error(error);
         }
       }
     );
