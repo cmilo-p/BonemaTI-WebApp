@@ -1,6 +1,6 @@
 <div class="row">
 
-    <div class="col-sm-8 col-lg-9">
+    <div class="col-sm-8 col-lg-10">
         <mat-accordion class="headers-align">
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -62,18 +62,17 @@
         </mat-accordion>
     </div>
 
-    <div class="col-sm-4 col-lg-3">
+    <div class="col-sm-4 col-lg-2">
         <div class="d-flex justify-content-center my-2">
 
-            <button mat-raised-button class="mx-2" [matMenuTriggerFor]="menu">Menu</button>
-            <mat-menu #menu="matMenu" xPosition="after">
-                <button mat-menu-item [routerLink]="['/calendar/maintenances']">Agenda Global</button>
-                <button mat-menu-item [routerLink]="['/calendar/']">Nueva Cita</button>
-            </mat-menu>
-
-            <button mat-raised-button class="mx-2" color="primary" >
+            <button mat-raised-button class="mx-2" [matMenuTriggerFor]="menu" color="primary">
                 <mat-icon>add_circle_outline</mat-icon>
             </button>
+            <mat-menu #menu="matMenu" xPosition="after">
+                <button mat-menu-item [routerLink]="['/calendar/appointment-group']">Agenda Global</button>
+                <button mat-menu-item [routerLink]="['/calendar/appointment']">Nueva Cita</button>
+            </mat-menu>
+
             <button mat-raised-button class="mx-2" color="warn" [routerLink]="['/home']">
                 <mat-icon>home</mat-icon>
             </button>
@@ -91,8 +90,14 @@
         <full-calendar [options]="calendarOptions" class="text-center"></full-calendar>
     </div>
 
-    <div class="col-sm-12 col-lg-3">
-        <app-appointments [appointments]="appointments"></app-appointments>
-    </div>
+    <cdk-virtual-scroll-viewport class="col-sm-12 col-lg-3" itemSize="60">
+        <dl class="example-dl mx-3">
+            <ng-container>
+                <div>
+                    <app-appointments [appointments]="appointments"></app-appointments>
+                </div>
+            </ng-container>
+        </dl>
+    </cdk-virtual-scroll-viewport>
 
 </div>

@@ -10,16 +10,16 @@ import { AppointmentsService } from 'src/app/services/appointments.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-maintenances',
-  templateUrl: './maintenances.component.html',
-  styleUrls: ['./maintenances.component.scss'],
+  selector: 'app-group-appointment',
+  templateUrl: './group-appointment.component.html',
+  styleUrls: ['./group-appointment.component.scss'],
   providers: [
     Host,
     DevicesService,
     AppointmentsService
   ]
 })
-export class MaintenancesComponent implements OnInit {
+export class GroupAppointmentComponent implements OnInit {
 
   public appoimentGroup: Array<any> = [];
 
@@ -63,7 +63,7 @@ export class MaintenancesComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.appoimentGroup.length <= 0){
+    if (this.appoimentGroup.length <= 0) {
       this.openSnackBar('Diligencia los campos', 'Cerrar');
     }
 

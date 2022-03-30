@@ -5,12 +5,9 @@
     </div>
 </div>
 
-<button mat-raised-button (click)="desbloquear()">
-    desbloquear
-</button>
-
 <div class="row">
-    <div class="col-12">
+
+    <div class="col-lg-12">
         <mat-card class="border">
             <form #appointmentForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="off">
 
@@ -32,7 +29,7 @@
                             <input matInput [matDatepicker]="picker" name="date_appointment" #date_appointment="ngModel"
                                 [(ngModel)]="appointment.date_appointment" required>
 
-                            <mat-datepicker-toggle matSuffix [for]="picker" disabled="{{desq}}"></mat-datepicker-toggle>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
 
@@ -45,13 +42,10 @@
                             <mat-label>Tipo de Mantenimiento</mat-label>
 
                             <mat-select name="tpMaintenance" #tpMaintenance="ngModel"
-                                [(ngModel)]="appointment.tpMaintenance" [disabled]="desq" required>
+                                [(ngModel)]="appointment.tpMaintenance" required>
                                 <mat-option value="Hardware">Hardware</mat-option>
                                 <mat-option value="Software">Software</mat-option>
                             </mat-select>
-
-                            <input matInput type="text" *ngIf="isEdit" name="tpMaintenance" #tpMaintenance="ngModel"
-                                [(ngModel)]="appointment.tpMaintenance" [readonly]="desq" required>
                         </mat-form-field>
                     </div>
 
@@ -61,9 +55,9 @@
 
                             <mat-select *ngIf="!isEdit" name="support_tec" #support_tec="ngModel"
                                 [(ngModel)]="appointment.support_tec" required>
-                                <mat-option value="Camilo Pinzón">Camilo Pinzón</mat-option>
-                                <mat-option value="Sebastian Rojas">Sebastian Rojas</mat-option>
-                                <mat-option value="Mauricio Ospina">Mauricio Ospina</mat-option>
+                                <div *ngFor="let user of users">
+                                    <mat-option value="{{user.name}}">{{user.name}}</mat-option>
+                                </div>
                             </mat-select>
 
                             <input matInput type="text" *ngIf="isEdit" name="support_tec" #support_tec="ngModel"
@@ -80,9 +74,9 @@
                             <mat-label>Funcionario</mat-label>
 
                             <mat-select name="employee" #employee="ngModel" [(ngModel)]="appointment.employee" required>
-                                <mat-option value="Angelica Jaimes">Angelica Jaimes</mat-option>
-                                <mat-option value="Sistemas">Sistemas</mat-option>
-                                <mat-option value="Sebastian Rojas">Sebastian Rojas</mat-option>
+                                <div *ngFor="let employee of employees">
+                                    <mat-option value="{{employee.name}}">{{employee.name}}</mat-option>
+                                </div>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -92,10 +86,9 @@
                             <mat-label>Equipo</mat-label>
 
                             <mat-select name="host" #host="ngModel" [(ngModel)]="appointment.host" required>
-                                <mat-option value="SERVIDOR">SERVIDOR</mat-option>
-                                <mat-option value="LAB-LIQUIDOS">LAB-LIQUIDOS</mat-option>
-                                <mat-option value="AUX-SISTEMAS">AUX-SISTEMAS</mat-option>
-                                <mat-option value="AUX-SISTEMAS-2">AUX-SISTEMAS-2</mat-option>
+                                <div *ngFor="let host of hosts">
+                                    <mat-option value="{{host.name}}">{{host.name}}</mat-option>
+                                </div>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -132,8 +125,7 @@
                     <div class="col">
                         <div class="my-3">
 
-                            <button mat-raised-button type="button" class="mx-1" (click)="onNoClick()"
-                                [routerLink]="['/calendar']">
+                            <button mat-raised-button type="button" class="mx-1" [routerLink]="['/calendar']">
                                 <mat-icon>arrow_back</mat-icon>
                             </button>
 
@@ -158,6 +150,13 @@
         </mat-card>
     </div>
 
-
+    <!-- <div class="col-lg-5">
+        <div class="text-center" *ngIf="!isEdit">
+            <img src="/assets/images/moduls/calendar/appointmentEmpty.svg" alt="usersEmpty.svg">
+        </div>
+        <div class="text-center" *ngIf="isEdit">
+            <img src="/assets/images/moduls/calendar/appointmentSuccess.svg" alt="usersSuccess.svg">
+        </div>
+    </div> -->
 
 </div>

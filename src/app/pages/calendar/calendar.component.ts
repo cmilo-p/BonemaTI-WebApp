@@ -4,7 +4,7 @@ import { AppointmentsService } from 'src/app/services/appointments.service';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi, CalendarApi } from '@fullcalendar/angular';
 
 import { MatDialog } from '@angular/material/dialog';
-import { NewAppointmentComponent } from './components/appointment/new-appointment/new-appointment.component';
+import { NewAppointmentComponent } from './components/new-appointment/new-appointment.component';
 
 @Component({
   selector: 'app-calendar',
@@ -15,33 +15,30 @@ import { NewAppointmentComponent } from './components/appointment/new-appointmen
 export class CalendarComponent implements OnInit {
 
   public appointments!: Appointment[];
-  //public appointment : Appointment;
   public eventos!: any[];
 
-  calendarVisible = true;
-  calendarOptions: CalendarOptions = {
+  public calendarVisible = true;
+  public calendarOptions: CalendarOptions = {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
+    locale: 'es',
     initialView: 'dayGridMonth',
     weekends: true,
-    editable: true,
+    editable: false,
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this)
   };
-  currentEvents: EventApi[] = [];
 
   constructor(
     private appointmentSvc: AppointmentsService,
     public dialog: MatDialog
-    ) {
-    //this.appointment = new Appointment('','','','','','','','','');
+  ) {
     this.eventos = []
   }
 
@@ -51,6 +48,7 @@ export class CalendarComponent implements OnInit {
         next: (response) => {
           if (response) {
             this.appointments = response.appointments;
+
             this.appointments.forEach(dataCall => {
               let date = new Date(dataCall.date_appointment).toISOString().replace(/T.*$/, '');
               this.eventos.push(
@@ -61,6 +59,7 @@ export class CalendarComponent implements OnInit {
                 }
               );
             });
+
             this.calendarOptions.events = this.eventos;
           } else {
             console.log(response);
@@ -76,35 +75,15 @@ export class CalendarComponent implements OnInit {
   handleDateSelect(selectInfo: DateSelectArg) {
     this.openDialog();
   }
-  
-  handleWeekendsToggle() {
-    const { calendarOptions } = this;
-    calendarOptions.weekends = !calendarOptions.weekends;
-  }
 
   handleEventClick(clickInfo: EventClickArg) {
-
+    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+      clickInfo.event.remove();
+    }
   }
 
-  handleEvents(events: EventApi[]) {
-    this.currentEvents = events;
+  openDialog(reference?: any) {
+    const refDialog = this.dialog.open(NewAppointmentComponent, reference);
   }
-
-
-  /* Dialog */
-  openDialog() {
-
-    const refDialog = this.dialog.open(NewAppointmentComponent);
-
-    refDialog.afterClosed().subscribe(result => {
-      if (result) {
-        
-        /* Datas devuelto del Dialog */
-
-      }
-    });
-  }
-
-
 
 }

@@ -1,18 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/models/User';
+import { Employee } from 'src/app/models/Employee';
+import { Device } from 'src/app/models/Devices';
 import { Appointment } from 'src/app/models/Appointment';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-appointment',
-  templateUrl: './appointment.component.html',
-  styleUrls: ['./appointment.component.scss'],
-  providers: [AppointmentsService]
+  selector: 'app-edit-appointment',
+  templateUrl: '../new-appointment/new-appointment.component.html',
+  providers: [
+    AppointmentsService
+  ]
 })
-export class AppointmentComponent implements OnInit {
+export class EditAppointmentComponent implements OnInit {
 
+  public users!: User[];
+  public employees!: Employee[];
+  public hosts!: Device[];
   public appointment: Appointment;
   public isEdit: boolean;
 
@@ -20,8 +27,8 @@ export class AppointmentComponent implements OnInit {
     private appointmentSvc: AppointmentsService,
     private _rt: Router,
     private _route: ActivatedRoute,
-    private _snackBar: MatSnackBar
-    ) {
+    private _snackBar: MatSnackBar,
+  ) {
     this.appointment = new Appointment('', '', '', '', '', '', '', '', '');
     this.isEdit = true;
   }
@@ -31,7 +38,6 @@ export class AppointmentComponent implements OnInit {
   }
 
   onSubmit() {
-    /* Implementar Mensajes del Sistema */
     this.appointmentSvc.update(this.appointment._id, this.appointment).subscribe(
       {
         next: (response) => {
@@ -46,6 +52,26 @@ export class AppointmentComponent implements OnInit {
         }
       }
     );
+  }
+
+  delete(id: any) {
+    this.appointmentSvc.delete(id).subscribe(
+      {
+        next: (response) => {
+          this._rt.navigate(['/calendar']);
+          this.openSnackBar('¡Agendamiento Eliminado!', 'Cerrar');
+        },
+        error: (error) => {
+          this._rt.navigate(['/calendar']);
+          this.openSnackBar('Error al eliminar el agendamiento', 'Cerrar');
+          console.warn(error);
+        }
+      }
+    );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
   }
 
   getAppointment() {
@@ -72,40 +98,6 @@ export class AppointmentComponent implements OnInit {
       );
 
     });
-  }
-
-  delete(id: any) {
-    this.appointmentSvc.delete(id).subscribe(
-      {
-        next: (response) => {
-          this._rt.navigate(['/calendar']);
-          this.openSnackBar('¡Agendamiento Eliminado!', 'Cerrar');
-        },
-        error: (error) => {
-          this._rt.navigate(['/calendar']);
-          this.openSnackBar('Error al eliminar el agendamiento', 'Cerrar');
-          console.warn(error);
-        }
-      }
-    );
-  }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
-  }
-
-  onNoClick() {
-    /* Función polimórfica establecida en newa-ppointment.component */
-  }
-
-  public desq: boolean = true
-  desbloquear() {
-    if (this.desq == false) {
-      this.desq = true
-    } else {
-      this.desq = false
-    }
-    console.log(this.desq);
   }
 
 }

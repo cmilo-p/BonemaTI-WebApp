@@ -9,18 +9,17 @@ import { FullcalendarModule } from 'src/app/modules/fullcalendar/fullcalendar.mo
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { CalendarComponent } from './calendar.component';
 import { AppointmentsComponent } from './components/appointments/appointments.component';
-import { MaintenancesComponent } from './components/maintenances/maintenances.component';
-import { AppointmentComponent } from './components/appointment/appointment.component';
-import { NewAppointmentComponent } from './components/appointment/new-appointment/new-appointment.component';
-
+import { NewAppointmentComponent } from './components/new-appointment/new-appointment.component';
+import { EditAppointmentComponent } from './components/edit-appointment/edit-appointment.component';
+import { GroupAppointmentComponent } from './components/group-appointment/group-appointment.component';
 
 @NgModule({
   declarations: [
     CalendarComponent,
     AppointmentsComponent,
-    MaintenancesComponent,
-    AppointmentComponent,
-    NewAppointmentComponent
+    NewAppointmentComponent,
+    EditAppointmentComponent,
+    GroupAppointmentComponent
   ],
   imports: [
     CommonModule,
