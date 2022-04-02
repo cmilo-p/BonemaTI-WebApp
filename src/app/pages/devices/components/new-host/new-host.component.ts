@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Device, Hardware } from 'src/app/models/Devices';
+import { Device, Hardware, Software } from 'src/app/models/Devices';
 import { DevicesService } from 'src/app/services/devices.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -31,12 +31,14 @@ export class NewHostComponent implements OnInit {
     this.title_form = 'INGRESAR HOST';
     this.isEdit = false;
 
-    this.software = {
+ /*    this.software = {
       system: { name: '', functionality: '', license: '' },
       office: { name: '', functionality: '', license: '' },
       antivirus: { name: '', functionality: '', license: '' },
-    }
+    } */
+
     this.hardware = new Hardware('', '', '', '', '', '');
+    this.software = new Software(Object(),Object(),Object());
     this.host = new Device('', '', '', '', '', '', '', '', '', this.hardware, this.software, '', true, null);
   }
 
@@ -48,7 +50,7 @@ export class NewHostComponent implements OnInit {
       {
         next: (response) => {
           if (response.status == 'success') {
-            this._rt.navigate(['/devices/host', response.host._id]);
+            this._rt.navigate(['/devices/host', response.hostStored._id]);
             this.openSnackBar('Dispositivo Creado!', 'Cerrar');
           } else {
             this.openSnackBar(response.message, 'Cerrar');

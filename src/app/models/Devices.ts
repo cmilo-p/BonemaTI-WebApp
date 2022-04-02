@@ -33,3 +33,24 @@ export class Hardware {
     ) { }
 
 }
+
+export class Software {
+
+    constructor(
+        public system: {
+            name: { type: string },
+            functionality: { type: string },
+            license: { type: string }
+        },
+        public office: {
+            name: { type: string },
+            functionality: { type: string },
+            license: { type: string }
+        },
+        public antivirus: {
+            name: { type: string },
+            functionality: { type: string },
+            license: { type: string },
+        }
+    ) { }
+}
