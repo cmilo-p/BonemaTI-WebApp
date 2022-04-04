@@ -19,7 +19,7 @@ export class UsersService {
   }
 
   getUser(userId: any): Observable<any> {
-    return this._http.get(this.url + 'user/' +userId);
+    return this._http.get(this.url + 'user/' + userId);
   }
 
   create(user: any): Observable<any> {
@@ -41,5 +41,13 @@ export class UsersService {
 
     return this._http.delete(this.url + 'user/' + id, { headers: headers });
   }
-  
+
+  signIn(user: any): Observable<any> {
+
+    let params = JSON.stringify(user);
+    let headers = new HttpHeaders().set('content-Type', 'application/json');
+
+    return this._http.post(this.url + 'user/signIn', params, { headers: headers });
+  }
+
 }

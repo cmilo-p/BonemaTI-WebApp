@@ -24,18 +24,12 @@ export class NewHostComponent implements OnInit {
 
   constructor(
     private deviceSvc: DevicesService,
-    private _rt: Router,
+    private _rt: Router ,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {
     this.title_form = 'INGRESAR HOST';
     this.isEdit = false;
-
- /*    this.software = {
-      system: { name: '', functionality: '', license: '' },
-      office: { name: '', functionality: '', license: '' },
-      antivirus: { name: '', functionality: '', license: '' },
-    } */
 
     this.hardware = new Hardware('', '', '', '', '', '');
     this.software = new Software(Object(),Object(),Object());
@@ -49,8 +43,9 @@ export class NewHostComponent implements OnInit {
     this.deviceSvc.create(this.host).subscribe(
       {
         next: (response) => {
+          console.log (response);
           if (response.status == 'success') {
-            this._rt.navigate(['/devices/host', response.hostStored._id]);
+            this._rt.navigate(['/devices/host', response.user._id]);
             this.openSnackBar('Dispositivo Creado!', 'Cerrar');
           } else {
             this.openSnackBar(response.message, 'Cerrar');

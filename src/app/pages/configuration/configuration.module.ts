@@ -16,6 +16,7 @@ import { NewUserComponent } from './components/users/new-user/new-user.component
 import { EditUserComponent } from './components/users/edit-user/edit-user.component';
 
 import { SharedModulesModule } from 'src/app/modules/shared-modules/shared-modules.module';
+import { AuthComponent } from './components/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { SharedModulesModule } from 'src/app/modules/shared-modules/shared-modul
     EditEmployeeComponent,
     NewUserComponent,
     EditUserComponent,
+    AuthComponent,
   ],
   imports: [
     CommonModule,

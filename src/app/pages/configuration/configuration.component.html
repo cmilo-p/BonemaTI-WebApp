@@ -6,6 +6,15 @@
             <div class="col-12">
                 <h1 class="fs-1 my-4">Entorno del Sistema</h1>
             </div>
+            
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <button mat-raised-button class="m-1 bg-grad-btn shadow border" [routerLink]="['/home']">
+                    <div class="row align-items-center p-3">
+                        <mat-icon>home</mat-icon>
+                    </div>
+                    <span class="d-block">Dashboard</span>
+                </button>
+            </div>
 
             <div class="col-sm-12 col-md-6 col-lg-6">
                 <button mat-raised-button class="m-1 bg-grad-btn shadow border" [routerLink]="['/config/users']">
@@ -26,9 +35,9 @@
             </div>
 
             <div class="col-sm-12 col-md-6 col-lg-6">
-                <button mat-raised-button class="m-1 bg-grad-exitBtn shadow border" [routerLink]="['/home']">
+                <button mat-raised-button class="m-1 bg-grad-exitBtn shadow border" [routerLink]="['/']">
                     <div class="row align-items-center p-3">
-                        <mat-icon>home</mat-icon>
+                        <mat-icon>logout</mat-icon>
                     </div>
                     <span class="d-block">Dashboard</span>
                 </button>

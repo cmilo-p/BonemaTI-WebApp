@@ -153,26 +153,25 @@
 
     <mat-tab label="Software" class="row">
         <div class="m-1 p-3">
+
             <div class="row">
                 <div class="col-sm-12 col-lg-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Sistema Operativo</mat-label>
-                        <input matInput type="text" name="system">
+                        <input matInput type="text" value="{{host.software[0].system.name}}" readonly>
                     </mat-form-field>
                 </div>
                 <div class="col-sm-12 col-lg-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Funcionalidad</mat-label>
-                        <input matInput type="text" name="system_functionality">
+                        <input matInput type="text" value="{{host.software[0].system.functionality}}" readonly>
                     </mat-form-field>
                 </div>
                 <div class="col-sm-12 col-lg-4">
-                    <mat-label class="text-secondary">Estado de Licencia: </mat-label>
-                    <br class="my-1">
-                    <mat-radio-group name="system_license">
-                        <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
-                        <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
-                    </mat-radio-group>
+                    <mat-form-field appearance="outline">
+                        <mat-label class="text-secondary">Estado de Licencia: </mat-label>
+                        <input matInput type="text" value="{{host.software[0].system.license}}" readonly>
+                    </mat-form-field>
                 </div>
             </div>
 
@@ -181,31 +180,20 @@
                 <div class="col-sm-12 col-lg-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Office</mat-label>
-                        <mat-select name="office">
-                            <mat-option value="Microsoft 365 Business">Microsoft 365 Business</mat-option>
-                            <mat-option value="Microsoft Hogar y Empresarial 2013">Microsoft Hogar y Empresarial
-                                2013
-                            </mat-option>
-                            <mat-option value="Microsoft Office Hogar y Pequeña Empresa 2010">Microsoft Office
-                                Hogar y
-                                Pequeña Empresa 2010</mat-option>
-                            <mat-option value="No licenciado">No Licenciado</mat-option>
-                        </mat-select>
+                        <input matInput type="text" value="{{host.software[0].office.name}}">
                     </mat-form-field>
                 </div>
                 <div class="col-sm-12 col-lg-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Funcionalidad</mat-label>
-                        <input matInput type="text" name="office_functionality">
+                        <input matInput type="text" value="{{host.software[0].office.functionality}}">
                     </mat-form-field>
                 </div>
                 <div class="col-sm-12 col-lg-4">
-                    <mat-label class="text-secondary">Estado de Licencia: </mat-label>
-                    <br class="my-1">
-                    <mat-radio-group name="office_license">
-                        <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
-                        <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
-                    </mat-radio-group>
+                    <mat-form-field appearance="outline">
+                        <mat-label class="text-secondary">Estado de Licencia: </mat-label>
+                        <input matInput type="text" value="{{host.software[0].office.license}}">
+                    </mat-form-field>
                 </div>
             </div>
 
@@ -214,30 +202,23 @@
                 <div class="col-sm-12 col-lg-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Antivirus</mat-label>
-                        <mat-select name="antivirus">
-                            <mat-option value="Avast Free">Avast Free</mat-option>
-                            <mat-option value="Kaspersky - 5 nodos">Kaspersky - 5 nodos</mat-option>
-                            <mat-option value="Kaspersky - 21 nodos">Kaspersky - 21 nodos</mat-option>
-                            <mat-option value="McAffe">McAffe</mat-option>
-                            <mat-option value="Windows Defender">Windows Defender</mat-option>
-                        </mat-select>
+                        <input matInput type="text" value="{{host.software[0].antivirus.name}}">
                     </mat-form-field>
                 </div>
                 <div class="col-sm-12 col-lg-4">
                     <mat-form-field appearance="outline">
                         <mat-label>Funcionalidad</mat-label>
-                        <input matInput type="text" name="antivirus_functionality">
+                        <input matInput matInput type="text" value="{{host.software[0].antivirus.functionality}}">
                     </mat-form-field>
                 </div>
                 <div class="col-sm-12 col-lg-4">
-                    <mat-label class="text-secondary">Estado de Licencia: </mat-label>
-                    <br class="my-1">
-                    <mat-radio-group name="antivirus_license">
-                        <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
-                        <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
-                    </mat-radio-group>
+                    <mat-form-field appearance="outline">
+                        <mat-label class="text-secondary">Estado de Licencia: </mat-label>
+                        <input matInput type="text" value="{{host.software[0].antivirus.license}}">
+                    </mat-form-field>
                 </div>
             </div>
+
         </div>
     </mat-tab>
 

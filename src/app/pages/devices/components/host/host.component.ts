@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DevicesService } from 'src/app/services/devices.service';
-import { Device } from 'src/app/models/Devices';
+import { Device, Hardware, Software } from 'src/app/models/Devices';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -13,8 +13,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class HostComponent implements OnInit {
 
-  /* Inicializar el host */
-  public host!: Device;
+  public host: Device;
+  public hardware: Hardware;
+  public software: Software;
 
   constructor(
     private deviceSvc: DevicesService,
@@ -22,8 +23,10 @@ export class HostComponent implements OnInit {
     private _route: ActivatedRoute,
     private _snackBar: MatSnackBar
   ) {
-    /* Inicializar el host */
-   }
+    this.hardware = new Hardware('', '', '', '', '', '');
+    this.software = new Software(Object(),Object(),Object());
+    this.host = new Device('', '', '', '', '', '', '', '', '', this.hardware, this.software, '', true, null);
+  }
 
   ngOnInit(): void {
     this._route.params.subscribe(params => {
@@ -34,6 +37,7 @@ export class HostComponent implements OnInit {
         {
           next: (response) => {
             if (response.host) {
+              console.log(response);
               this.host = response.host
             } else {
               this.openSnackBar(response.message, 'Cerrar');

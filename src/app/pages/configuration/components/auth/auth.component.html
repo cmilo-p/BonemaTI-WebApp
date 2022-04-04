@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Inicio de Sesión</h1>
+
+<form #singInForm (submit)="signIn()">
+    <div mat-dialog-content>
+
+        <mat-form-field appearance="outline">
+            <mat-label for="username">Usuario/email</mat-label>
+            <input matInput type="email" name="username" #username="ngModel" [(ngModel)]="user.username" placeholder="ejemplo@bonema.com.co"
+                autocomplete="off" required>
+            <mat-error>Nombre de usuario invalido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label for="password">Contraseña</mat-label>
+            <input matInput type="password" name="password" #password="ngModel" [(ngModel)]="user.password" required>
+            <mat-error>Contraseña no valida</mat-error>
+        </mat-form-field>
+
+    </div>
+
+    <div mat-dialog-actions>
+        <span class="spacer"></span>
+        <button mat-raised-button type="button">Volver</button>
+        <!-- mat-dialog-close -->
+        <button mat-raised-button color="primary" type="submit">Ingresar</button>
+        <!-- [mat-dialog-close]="true" -->
+    </div>
+</form>
