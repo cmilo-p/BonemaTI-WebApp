@@ -11,7 +11,7 @@ import { User } from 'src/app/models/User';
   providers: [UsersService]
 })
 export class AuthComponent implements OnInit {
-  
+
   public user: User;
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
@@ -29,7 +29,7 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  signIn() {
+  signIn(route?: string) {
     this.userSvc.signIn(this.user).subscribe(
       {
         next: (response) => {

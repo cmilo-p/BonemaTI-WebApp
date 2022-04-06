@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DevicesService } from 'src/app/services/devices.service';
+import { AppointmentsService } from 'src/app/services/appointments.service';
 
 var single = [
   {
@@ -59,33 +61,65 @@ var single = [
 export class HomePagesComponent implements OnInit {
 
   public userlogged: boolean;
-  single =[]
-  view: [number, number] = [800, 260];
+  public totalHost: number;
+
+  single = []
+  view: [number, number] = [700, 260];
 
   // options
   showXAxis = true;
   showYAxis = true;
-  gradient = false;
-  showLegend = true;
+  gradient = true;
+  showLegend = false;
   showXAxisLabel = true;
   xAxisLabel = 'Mes de Mantenimiento';
   showYAxisLabel = true;
   yAxisLabel = '% de Satisfacción';
 
-  constructor() {
+  constructor(
+    private hostSvc: DevicesService,
+    private appointmentSvc: AppointmentsService
+  ) {
     this.userlogged = false;
+    this.totalHost = 0;
     Object.assign(this, { single })
   }
 
   ngOnInit(): void {
     this.userCredential();
+
+    this.hostSvc.getHosts().subscribe(
+      {
+        next: (response) => {
+          this.totalHost = response.hosts.length;
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      }
+    );
+
+    this.appointmentSvc.getAppointments().subscribe(
+      {
+        next:(response) => {
+
+          
+          console.log(response);
+        },
+        error:(error) => {
+          console.log(error);  
+        }
+      }
+    );
+
   }
 
   onSelect(event: any) {
     console.log(event);
   }
 
-  userCredential(){
+
+  userCredential() {
     if (localStorage.getItem('auth')) {
       this.userlogged = true;
     }

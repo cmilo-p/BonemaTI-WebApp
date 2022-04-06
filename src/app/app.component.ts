@@ -14,6 +14,9 @@ export class AppComponent implements OnInit, DoCheck {
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem('auth')) {
+      this.userlogged = false;
+    }
   }
 
   ngDoCheck(): void {

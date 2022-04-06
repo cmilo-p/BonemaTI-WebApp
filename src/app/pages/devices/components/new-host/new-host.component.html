@@ -154,7 +154,7 @@
                         <mat-form-field appearance="outline">
                             <mat-label>Sistema Operativo</mat-label>
                             <input matInput type="text" name="system" #system="ngModel"
-                                [(ngModel)]="software.system.name">
+                                [(ngModel)]="software.system.name" required>
                         </mat-form-field>
                     </div>
                     <div class="col-sm-12 col-lg-4">
@@ -168,7 +168,7 @@
                         <mat-label class="text-secondary">Estado de Licencia: </mat-label>
                         <br class="my-1">
                         <mat-radio-group name="system_license" #system_license="ngModel"
-                            [(ngModel)]="software.system.license">
+                            [(ngModel)]="software.system.license" required>
                             <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
                             <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
                         </mat-radio-group>
@@ -180,7 +180,7 @@
                     <div class="col-sm-12 col-lg-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Office</mat-label>
-                            <mat-select name="office" #office="ngModel" [(ngModel)]="software.office.name">
+                            <mat-select name="office" #office="ngModel" [(ngModel)]="software.office.name" required>
                                 <mat-option value="Microsoft 365 Business">Microsoft 365 Business</mat-option>
                                 <mat-option value="Microsoft Hogar y Empresarial 2013">Microsoft Hogar y Empresarial
                                     2013
@@ -203,7 +203,7 @@
                         <mat-label class="text-secondary">Estado de Licencia: </mat-label>
                         <br class="my-1">
                         <mat-radio-group name="office_license" #office_license="ngModel"
-                            [(ngModel)]="software.office.license">
+                            [(ngModel)]="software.office.license" required>
                             <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
                             <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
                         </mat-radio-group>
@@ -215,7 +215,8 @@
                     <div class="col-sm-12 col-lg-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Antivirus</mat-label>
-                            <mat-select name="antivirus" #antivirus="ngModel" [(ngModel)]="software.antivirus.name">
+                            <mat-select name="antivirus" #antivirus="ngModel" [(ngModel)]="software.antivirus.name"
+                                required>
                                 <mat-option value="Avast Free">Avast Free</mat-option>
                                 <mat-option value="Kaspersky - 5 nodos">Kaspersky - 5 nodos</mat-option>
                                 <mat-option value="Kaspersky - 21 nodos">Kaspersky - 21 nodos</mat-option>
@@ -235,7 +236,7 @@
                         <mat-label class="text-secondary">Estado de Licencia: </mat-label>
                         <br class="my-1">
                         <mat-radio-group name="antivirus_license" #antivirus_license="ngModel"
-                            [(ngModel)]="software.antivirus.license">
+                            [(ngModel)]="software.antivirus.license" required>
                             <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
                             <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
                         </mat-radio-group>
