@@ -1,133 +1,137 @@
-<div class="row">
-  <div class="col-12">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
+<div *ngIf="userlogged">
 
-        <span class="navbar-brand">
-          <mat-icon class="me-2">desktop_windows</mat-icon>
-          Gestión de Dispositivos
-        </span>
+  <div class="row">
+    <div class="col-12">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
-          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <span class="navbar-brand">
+            <mat-icon class="me-2">desktop_windows</mat-icon>
+            Gestión de Dispositivos
+          </span>
 
-          <span class="spacer"></span>
-
-          <button mat-raised-button class="mx-1" color="primary" title="Agregar Empleado" [routerLink]="['create']">
-            <mat-icon>add_circle</mat-icon>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
           </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 
-          <button mat-raised-button class="mx-1" title="Filtrar Datos" disabled="true">
-            <mat-icon>filter_alt</mat-icon>
-          </button>
+            <span class="spacer"></span>
 
-          <button mat-raised-button class="mx-1" [matMenuTriggerFor]="menu">
-            <mat-icon>menu</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item disabled="true">Exportar Tabla</button>
-            <app-exports-btn (exportFile)="exporter.exportTable($event.extFile)"></app-exports-btn>
-          </mat-menu>
+            <button mat-raised-button class="mx-1" color="primary" title="Agregar Empleado" [routerLink]="['create']">
+              <mat-icon>add_circle</mat-icon>
+            </button>
 
-          <button mat-raised-button color="warn" [routerLink]="['/home']">
-            <mat-icon>home</mat-icon>
-          </button>
+            <button mat-raised-button class="mx-1" title="Filtrar Datos" disabled="true">
+              <mat-icon>filter_alt</mat-icon>
+            </button>
 
+            <button mat-raised-button class="mx-1" [matMenuTriggerFor]="menu">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item disabled="true">Exportar Tabla</button>
+              <app-exports-btn (exportFile)="exporter.exportTable($event.extFile)"></app-exports-btn>
+            </mat-menu>
+
+            <button mat-raised-button color="warn" [routerLink]="['/home']">
+              <mat-icon>home</mat-icon>
+            </button>
+
+          </div>
         </div>
-      </div>
-    </nav>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-12">
-    <mat-form-field appearance="standard">
-      <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" #input>
-    </mat-form-field>
-
-  </div>
-</div>
-
-<div class="row">
-  <div class="d-none d-lg-block">
-    <table mat-table [dataSource]="dataSource" matTableExporter #exporter="matTableExporter">
-
-      <ng-container matColumnDef="CÓDIGO">
-        <th mat-header-cell *matHeaderCellDef> CÓDIGO </th>
-        <td mat-cell *matCellDef="let row">
-          <a [routerLink]="['/devices/host/', row._id]"> {{row.code}} </a>
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="TIPO DISPOSITIVO">
-        <th mat-header-cell *matHeaderCellDef> TIPO DISPOSITIVO </th>
-        <td mat-cell *matCellDef="let row"> {{row.tpDevice}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="NOMBRE EQUIPO">
-        <th mat-header-cell *matHeaderCellDef> NOMBRE EQUIPO </th>
-        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="ASIGNADO A">
-        <th mat-header-cell *matHeaderCellDef> ASIGNADO A </th>
-        <td mat-cell *matCellDef="let row"> {{row.employee}} </td>
-      </ng-container>
-
-      <ng-container matColumnDef="UBICACIÓN">
-        <th mat-header-cell *matHeaderCellDef> UBICACIÓN </th>
-        <td mat-cell *matCellDef="let row"> {{'BONEMA'}} </td>
-      </ng-container>
-
-
-      <ng-container matColumnDef="ESTADO">
-        <th mat-header-cell *matHeaderCellDef> ESTADO </th>
-        <td mat-cell *matCellDef="let row"> {{row.state}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">No hay que coincidan con la búsqueda de: "{{input.value}}"</td>
-      </tr>
-    </table>
-
-    <mat-paginator [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of users"></mat-paginator>
-
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-12 d-lg-none">
-
-    <div *ngFor="let host of dataSource.data">
-      <mat-accordion>
-        <mat-expansion-panel hideToggle class="my-1">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{ host.name }}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-
-          <mat-card class="border">
-            <div class="p-1"><span class="text-secondary">CÓDIGO :</span> {{ host.code }}</div>
-            <div class="p-1"><span class="text-secondary">DISPOSITIVO :</span> {{ host.tpDevice }}</div>
-            <div class="p-1"><span class="text-secondary">NOMBRE EQUIPO :</span> {{ host.name }}</div>
-            <div class="p-1"><span class="text-secondary">ASIGNADO A :</span> {{ host.employee }}</div>
-            <div class="p-1"><span class="text-secondary">UBICACIÓN :</span> {{'BONEMA'}}</div>
-            <div class="p-1"><span class="text-secondary">ESTADO :</span> {{ host.state }}</div>
-            <div class="text-center">
-              <a [routerLink]="['/devices/host/', host._id]"> Consultar </a>
-            </div>
-          </mat-card>
-
-        </mat-expansion-panel>
-      </mat-accordion>
+      </nav>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-12">
+      <mat-form-field appearance="standard">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+      </mat-form-field>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="d-none d-lg-block">
+      <table mat-table [dataSource]="dataSource" matTableExporter #exporter="matTableExporter">
+
+        <ng-container matColumnDef="CÓDIGO">
+          <th mat-header-cell *matHeaderCellDef> CÓDIGO </th>
+          <td mat-cell *matCellDef="let row">
+            <a [routerLink]="['/devices/host/', row._id]"> {{row.code}} </a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="TIPO DISPOSITIVO">
+          <th mat-header-cell *matHeaderCellDef> TIPO DISPOSITIVO </th>
+          <td mat-cell *matCellDef="let row"> {{row.tpDevice}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="NOMBRE EQUIPO">
+          <th mat-header-cell *matHeaderCellDef> NOMBRE EQUIPO </th>
+          <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ASIGNADO A">
+          <th mat-header-cell *matHeaderCellDef> ASIGNADO A </th>
+          <td mat-cell *matCellDef="let row"> {{row.employee}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="UBICACIÓN">
+          <th mat-header-cell *matHeaderCellDef> UBICACIÓN </th>
+          <td mat-cell *matCellDef="let row"> {{'BONEMA'}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="ESTADO">
+          <th mat-header-cell *matHeaderCellDef> ESTADO </th>
+          <td mat-cell *matCellDef="let row"> {{row.state}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No hay que coincidan con la búsqueda de: "{{input.value}}"</td>
+        </tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of users"></mat-paginator>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 d-lg-none">
+
+      <div *ngFor="let host of dataSource.data">
+        <mat-accordion>
+          <mat-expansion-panel hideToggle class="my-1">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{ host.name }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-card class="border">
+              <div class="p-1"><span class="text-secondary">CÓDIGO :</span> {{ host.code }}</div>
+              <div class="p-1"><span class="text-secondary">DISPOSITIVO :</span> {{ host.tpDevice }}</div>
+              <div class="p-1"><span class="text-secondary">NOMBRE EQUIPO :</span> {{ host.name }}</div>
+              <div class="p-1"><span class="text-secondary">ASIGNADO A :</span> {{ host.employee }}</div>
+              <div class="p-1"><span class="text-secondary">UBICACIÓN :</span> {{'BONEMA'}}</div>
+              <div class="p-1"><span class="text-secondary">ESTADO :</span> {{ host.state }}</div>
+              <div class="text-center">
+                <a [routerLink]="['/devices/host/', host._id]"> Consultar </a>
+              </div>
+            </mat-card>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+  </div>
+
 </div>

@@ -6,12 +6,12 @@ import { PageNotFoundComponent } from './shared/errors/page-not-found/page-not-f
 import { LandingPageComponent } from './shared/landing-page/landing-page.component';
 
 const routes: Routes = [
-  { path: '', component: AuthComponent },
-  { path: 'initPage', component: LandingPageComponent },
+  { path: '', component: LandingPageComponent },
+  { path: 'signIn', component: AuthComponent },
   { path: 'home', component: HomePagesComponent },
-  { path: 'config', loadChildren: () => import('./pages/configuration/configuration.module').then(m => m.ConfigurationModule) },
   { path: 'calendar', loadChildren: () => import('./pages/calendar/calendar.module').then(m => m.CalendarModule) },
   { path: 'devices', loadChildren: () => import('./pages/devices/devices.module').then(m => m.DevicesModule) },
+  { path: 'config', loadChildren: () => import('./pages/configuration/configuration.module').then(m => m.ConfigurationModule) },
   { path: '**', component: PageNotFoundComponent },
 ];
 

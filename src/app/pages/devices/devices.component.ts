@@ -13,6 +13,8 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class DevicesComponent implements AfterViewInit, OnInit {
 
+  public userlogged: boolean;
+
   public displayedColumns: string[];
   public dataSource: MatTableDataSource<Device>;
 
@@ -21,6 +23,7 @@ export class DevicesComponent implements AfterViewInit, OnInit {
   constructor(
     private deviceSvc: DevicesService
   ) {
+    this.userlogged = false;
     this.displayedColumns = ['CÓDIGO','TIPO DISPOSITIVO', 'NOMBRE EQUIPO', 'ASIGNADO A', 'UBICACIÓN', 'ESTADO'];
     this.dataSource = new MatTableDataSource();
   }
@@ -30,6 +33,7 @@ export class DevicesComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
+    this.userCredential();
     this.deviceSvc.getHosts().subscribe(
       {
         next: (response) => {
@@ -48,6 +52,12 @@ export class DevicesComponent implements AfterViewInit, OnInit {
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+    }
+  }
+
+  userCredential(){
+    if (localStorage.getItem('auth')) {
+      this.userlogged = true;
     }
   }
 

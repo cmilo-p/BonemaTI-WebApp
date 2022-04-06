@@ -14,6 +14,8 @@ import { NewAppointmentComponent } from './components/new-appointment/new-appoin
 })
 export class CalendarComponent implements OnInit {
 
+  public userlogged: boolean;
+
   public appointments!: Appointment[];
   public eventos!: any[];
 
@@ -39,10 +41,12 @@ export class CalendarComponent implements OnInit {
     private appointmentSvc: AppointmentsService,
     public dialog: MatDialog
   ) {
+    this.userlogged = false;
     this.eventos = []
   }
 
   ngOnInit(): void {
+    this.userCredential();
     this.appointmentSvc.getAppointments().subscribe(
       {
         next: (response) => {
@@ -84,6 +88,12 @@ export class CalendarComponent implements OnInit {
 
   openDialog(reference?: any) {
     const refDialog = this.dialog.open(NewAppointmentComponent, reference);
+  }
+
+  userCredential() {
+    if (localStorage.getItem('auth')) {
+      this.userlogged = true;
+    }
   }
 
 }

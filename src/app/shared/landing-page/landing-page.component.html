@@ -1,1 +1,82 @@
-<p>landing-page works!</p>
+<div class="row">
+    <div class="col-12">
+        <mat-toolbar color="primary">
+            <span>Bonema TI</span>
+            <span class="example-spacer"></span>
+            <button mat-icon-button (click)="openDialog()">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+        </mat-toolbar>
+    </div>
+</div>
+
+<div class="row my-3">
+
+    <div class="col-4">
+        <mat-card class="text-center fs-5">
+            <a [routerLink]="['/signIn']">
+                <mat-icon>calendar_today</mat-icon>
+            </a>
+            <div class="mt-2">Programación</div>
+        </mat-card>
+    </div>
+
+    <div class="col-4">
+        <mat-card class="text-center fs-5">
+            <a [routerLink]="['/signIn']">
+                <mat-icon>computer</mat-icon>
+            </a>
+            <div class="mt-2">Dispositivos</div>
+        </mat-card>
+    </div>
+
+    <div class="col-4">
+        <mat-card class="text-center fs-5">
+            <a [routerLink]="['/signIn']">
+                <mat-icon>public</mat-icon>
+            </a>
+            <div class="mt-2">GitHub</div>
+        </mat-card>
+    </div>
+
+</div>
+
+<div class="row mt-5">
+
+    <div class="col-12">
+        <h2 class="fs-4">Soporte Técnico</h2>
+        <p>* Comunícate con el área de Soporte técnico de Bonema SAS</p>
+    </div>
+
+    <mat-card class="col-6 shadow">
+        <form (ngSubmit)="onSubmit()" class="my-3">
+
+            <mat-form-field appearance="outline">
+                <mat-label for="email">Corre Electrónico</mat-label>
+                <input matInput type="email" placeholder="mail@bonema.com.co">
+                <mat-error>
+                    El correo electrónico no es valido
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Asunto</mat-label>
+                <textarea matInput></textarea>
+                <mat-hint>Escriba un texto no menor a 10 caracteres</mat-hint>
+                <mat-error>
+                    Asunto sin contexto
+                </mat-error>
+            </mat-form-field>
+
+            <button mat-raised-button type="submit" color="primary" class="w-100 mt-3">
+                <mat-icon>mail</mat-icon>
+            </button>
+
+        </form>
+    </mat-card>
+
+    <div class="col-6">
+        <img src="/assets/images/errors/error404.svg" class="mx-auto">
+    </div>
+
+</div>

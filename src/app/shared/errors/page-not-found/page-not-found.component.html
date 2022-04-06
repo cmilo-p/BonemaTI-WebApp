@@ -12,7 +12,7 @@
             <span class="fs-5">¡La página que busca no está disponible en estos momentos...o talvez no exista!</span>
             <br class="my-3">
 
-            <button mat-raised-button [routerLink]="['/home']">
+            <button mat-raised-button (click)="backView()">
                 <span>Volver</span>
                 <mat-icon>home</mat-icon>
             </button>

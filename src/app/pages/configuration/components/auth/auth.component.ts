@@ -11,11 +11,12 @@ import { User } from 'src/app/models/User';
   providers: [UsersService]
 })
 export class AuthComponent implements OnInit {
+  
+  public user: User;
 
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
-  public user: User;
 
   constructor(
     private userSvc: UsersService,
@@ -43,7 +44,7 @@ export class AuthComponent implements OnInit {
               verticalPosition: this.verticalPosition,
             });
 
-            //localStorage.setItem('auth', JSON.stringify(userLoged.name));
+            localStorage.setItem('auth', JSON.stringify(userLoged.name));
 
           } else {
             this.openSnackBar(response.message, 'Cerrar');

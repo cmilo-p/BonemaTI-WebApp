@@ -1,55 +1,59 @@
-<div class="row">
+<div *ngIf="userlogged">
 
-    <div class="col-sm-12 col-lg-6">
-        <div class="row">
+    <div class="row">
 
-            <div class="col-12">
-                <h1 class="fs-1 my-4">Entorno del Sistema</h1>
+        <div class="col-sm-12 col-lg-6">
+            <div class="row">
+    
+                <div class="col-12">
+                    <h1 class="fs-1 my-4">Entorno del Sistema</h1>
+                </div>
+                
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <button mat-raised-button class="m-1 bg-grad-btn shadow border" [routerLink]="['/home']">
+                        <div class="row align-items-center p-3">
+                            <mat-icon>home</mat-icon>
+                        </div>
+                        <span class="d-block">Dashboard</span>
+                    </button>
+                </div>
+    
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <button mat-raised-button class="m-1 bg-grad-btn shadow border" [routerLink]="['/config/users']">
+                        <div class="row align-items-center p-3">
+                            <mat-icon>account_circle</mat-icon>
+                        </div>
+                        <span class="d-block">Usuarios</span>
+                    </button>
+                </div>
+    
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <button mat-raised-button class="m-1 bg-grad-btn shadow border" [routerLink]="['/config/employees']">
+                        <div class="row align-items-center p-3">
+                            <mat-icon>badge</mat-icon>
+                        </div>
+                        <span class="d-block">Empleados</span>
+                    </button>
+                </div>
+    
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <button mat-raised-button class="m-1 bg-grad-exitBtn shadow border" (click)="logout()">
+                        <div class="row align-items-center p-3">
+                            <mat-icon>logout</mat-icon>
+                        </div>
+                        <span class="d-block">Dashboard</span>
+                    </button>
+                </div>
+    
             </div>
-            
-            <div class="col-sm-12 col-md-6 col-lg-6">
-                <button mat-raised-button class="m-1 bg-grad-btn shadow border" [routerLink]="['/home']">
-                    <div class="row align-items-center p-3">
-                        <mat-icon>home</mat-icon>
-                    </div>
-                    <span class="d-block">Dashboard</span>
-                </button>
-            </div>
-
-            <div class="col-sm-12 col-md-6 col-lg-6">
-                <button mat-raised-button class="m-1 bg-grad-btn shadow border" [routerLink]="['/config/users']">
-                    <div class="row align-items-center p-3">
-                        <mat-icon>account_circle</mat-icon>
-                    </div>
-                    <span class="d-block">Usuarios</span>
-                </button>
-            </div>
-
-            <div class="col-sm-12 col-md-6 col-lg-6">
-                <button mat-raised-button class="m-1 bg-grad-btn shadow border" [routerLink]="['/config/employees']">
-                    <div class="row align-items-center p-3">
-                        <mat-icon>badge</mat-icon>
-                    </div>
-                    <span class="d-block">Empleados</span>
-                </button>
-            </div>
-
-            <div class="col-sm-12 col-md-6 col-lg-6">
-                <button mat-raised-button class="m-1 bg-grad-exitBtn shadow border" [routerLink]="['/']">
-                    <div class="row align-items-center p-3">
-                        <mat-icon>logout</mat-icon>
-                    </div>
-                    <span class="d-block">Dashboard</span>
-                </button>
-            </div>
-
         </div>
-    </div>
-
-    <div class="d-none d-lg-block col-lg-6">
-        <div class="bg-img shadow border">
-            <img src="/assets/images/moduls/configs/configModule.svg" alt="configModule.svg">
+    
+        <div class="d-none d-lg-block col-lg-6">
+            <div class="bg-img shadow border">
+                <img src="/assets/images/moduls/configs/configModule.svg" alt="configModule.svg">
+            </div>
         </div>
+    
     </div>
 
 </div>

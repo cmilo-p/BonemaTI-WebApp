@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 var single = [
   {
@@ -56,10 +56,10 @@ var single = [
   templateUrl: './home-pages.component.html',
   styleUrls: ['./home-pages.component.scss']
 })
-export class HomePagesComponent {
+export class HomePagesComponent implements OnInit {
 
+  public userlogged: boolean;
   single =[]
-
   view: [number, number] = [800, 260];
 
   // options
@@ -73,11 +73,22 @@ export class HomePagesComponent {
   yAxisLabel = '% de Satisfacción';
 
   constructor() {
+    this.userlogged = false;
     Object.assign(this, { single })
+  }
+
+  ngOnInit(): void {
+    this.userCredential();
   }
 
   onSelect(event: any) {
     console.log(event);
+  }
+
+  userCredential(){
+    if (localStorage.getItem('auth')) {
+      this.userlogged = true;
+    }
   }
 
 }

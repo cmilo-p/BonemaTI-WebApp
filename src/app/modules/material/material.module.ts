@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 /* layout */
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
@@ -33,6 +34,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [],
   exports: [
+    MatGridListModule,
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
@@ -57,7 +59,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatPaginatorModule
   ],
   providers: [
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } }
   ]
 })
 export class MaterialModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,9 +8,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor() { }
+  public userlogged: boolean;
+
+  constructor(
+    private _rt: Router 
+  ) {
+    this.userlogged = false;
+   }
 
   ngOnInit(): void {
+    this.userCredential();
+  }
+
+  backView() {
+    if(this.userlogged) {
+      this._rt.navigate(['/home']);
+    } else {
+      this._rt.navigate(['/']);
+    }
+  }
+
+  userCredential() {
+    if (localStorage.getItem('auth')) {
+      this.userlogged = true;
+    } else { 
+      this.userlogged = false;
+    }
   }
 
 }
