@@ -73,6 +73,7 @@
                 <mat-menu #menu="matMenu" xPosition="after">
                     <button mat-menu-item [routerLink]="['/calendar/appointment-group']">Agenda Global</button>
                     <button mat-menu-item [routerLink]="['/calendar/appointment']">Nueva Cita</button>
+                    <button mat-menu-item [routerLink]="['/calendar/appointment-historic']">Historial</button>
                 </mat-menu>
 
                 <button mat-raised-button class="mx-2" color="warn" [routerLink]="['/home']">
@@ -95,8 +96,12 @@
         <cdk-virtual-scroll-viewport class="col-sm-12 col-lg-3" itemSize="60">
             <dl class="example-dl mx-3">
                 <ng-container>
-                    <div>
-                        <app-appointments [appointments]="appointments"></app-appointments>
+                    <div *ngIf="maintenance.length >= 1">
+                        <app-appointments [appointments]="maintenance"></app-appointments>
+                    </div>
+                    <div *ngIf="maintenance.length === 0" class="text-center">
+                       <h2>No hay Mantenimientos por Realizar</h2>
+                       <img src="/assets/images/moduls/calendar/breakCalendar.svg" alt="breakCalendar.svg">
                     </div>
                 </ng-container>
             </dl>

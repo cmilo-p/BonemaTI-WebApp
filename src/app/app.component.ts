@@ -1,4 +1,7 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
+import { AuthComponent } from './pages/configuration/components/auth/auth.component';
+
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +12,9 @@ export class AppComponent implements OnInit, DoCheck {
 
   public userlogged: boolean
 
-  constructor() {
+  constructor(
+    public dialog: MatDialog
+  ) {
     this.userlogged = false;
   }
 
@@ -29,6 +34,10 @@ export class AppComponent implements OnInit, DoCheck {
     } else { 
       this.userlogged = false;
     }
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(AuthComponent);
   }
 
 }

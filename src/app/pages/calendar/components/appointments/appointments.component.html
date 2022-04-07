@@ -8,14 +8,18 @@
                 'card-header-image-1' : appointment.tpMaintenance == 'Hardware',
                 'card-header-image-2' : appointment.tpMaintenance == 'Software'
             }"></div>
-            <mat-card-title>{{ appointment.employee }}</mat-card-title>
+            <mat-card-title>
+                <a [routerLink]="['/calendar/appointment', appointment._id]">
+                    {{ appointment.host }}
+                </a>
+            </mat-card-title>
             <mat-card-subtitle>{{ appointment.date_appointment | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
         </mat-card-header>
 
         <mat-card-content>
             <div>
                 <span class="mx-2">Tipo:</span>
-                <a [routerLink]="['/calendar/appointment', appointment._id]">{{ appointment.tpMaintenance }}</a>
+                <span>{{ appointment.tpMaintenance }}</span>
             </div>
             <div>
                 <span class="mx-2">Estado:</span>

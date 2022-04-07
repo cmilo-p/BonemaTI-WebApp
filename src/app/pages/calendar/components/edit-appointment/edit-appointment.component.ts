@@ -42,13 +42,15 @@ export class EditAppointmentComponent implements OnInit {
       {
         next: (response) => {
           if (response) {
-            console.log(response);
+            this.openSnackBar('Mantenimiento actualizado!', 'Cerrar');
           } else {
-            console.log(response);
+            this.openSnackBar(response.message, 'Cerrar');
+            console.warn(response);
           }
         },
         error: (error) => {
-          console.log(error);
+          this.openSnackBar('Error al actualizar el mantenimiento', 'Cerrar');
+          console.error(error);
         }
       }
     );

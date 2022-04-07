@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DevicesService } from 'src/app/services/devices.service';
+import { EmployeesService } from 'src/app/services/employees.service';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 
 var single = [
@@ -61,10 +62,11 @@ var single = [
 export class HomePagesComponent implements OnInit {
 
   public userlogged: boolean;
-  public totalHost: number;
+  public totalHosts: number;
+  public totalEmployees: number;
 
   single = []
-  view: [number, number] = [700, 260];
+  view: [number, number] = [800, 260];
 
   // options
   showXAxis = true;
@@ -78,10 +80,12 @@ export class HomePagesComponent implements OnInit {
 
   constructor(
     private hostSvc: DevicesService,
+    private employeeSvc: EmployeesService,
     private appointmentSvc: AppointmentsService
   ) {
     this.userlogged = false;
-    this.totalHost = 0;
+    this.totalHosts = 0;
+    this.totalEmployees = 0;
     Object.assign(this, { single })
   }
 
@@ -91,7 +95,18 @@ export class HomePagesComponent implements OnInit {
     this.hostSvc.getHosts().subscribe(
       {
         next: (response) => {
-          this.totalHost = response.hosts.length;
+          this.totalHosts = response.hosts.length;
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      }
+    );
+
+    this.employeeSvc.getEmployees().subscribe(
+      {
+        next: (response) => {
+          this.totalEmployees = response.employees.length;
         },
         error: (error) => {
           console.error(error);
@@ -102,12 +117,13 @@ export class HomePagesComponent implements OnInit {
     this.appointmentSvc.getAppointments().subscribe(
       {
         next:(response) => {
-
           
-          console.log(response);
+          let res = response.appointments;
+
+
         },
         error:(error) => {
-          console.log(error);  
+          console.error(error);  
         }
       }
     );
@@ -117,7 +133,6 @@ export class HomePagesComponent implements OnInit {
   onSelect(event: any) {
     console.log(event);
   }
-
 
   userCredential() {
     if (localStorage.getItem('auth')) {

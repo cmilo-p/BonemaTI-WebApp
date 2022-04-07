@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Appointment } from 'src/app/models/Appointment';
 import { AppointmentsService } from 'src/app/services/appointments.service';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi, CalendarApi } from '@fullcalendar/angular';
@@ -17,6 +18,8 @@ export class CalendarComponent implements OnInit {
   public userlogged: boolean;
 
   public appointments!: Appointment[];
+  public maintenance: Appointment[];
+
   public eventos!: any[];
 
   public calendarVisible = true;
@@ -38,15 +41,18 @@ export class CalendarComponent implements OnInit {
   };
 
   constructor(
+    private _rt: Router,
     private appointmentSvc: AppointmentsService,
     public dialog: MatDialog
   ) {
+    this.maintenance = [];
     this.userlogged = false;
     this.eventos = []
   }
 
   ngOnInit(): void {
     this.userCredential();
+
     this.appointmentSvc.getAppointments().subscribe(
       {
         next: (response) => {
@@ -57,12 +63,15 @@ export class CalendarComponent implements OnInit {
               let date = new Date(dataCall.date_appointment).toISOString().replace(/T.*$/, '');
               this.eventos.push(
                 {
+                  id: dataCall._id,
                   title: dataCall.employee,
                   start: date,
                   end: date,
                 }
               );
             });
+
+            this.mantenimientos(this.appointments);
 
             this.calendarOptions.events = this.eventos;
           } else {
@@ -81,13 +90,24 @@ export class CalendarComponent implements OnInit {
   }
 
   handleEventClick(clickInfo: EventClickArg) {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove();
-    }
+    let id = clickInfo.event._def.publicId;
+    this.openDialog(id);
   }
 
   openDialog(reference?: any) {
-    const refDialog = this.dialog.open(NewAppointmentComponent, reference);
+    if(reference){
+      this._rt.navigate(['/calendar/appointment/', reference]);
+    } else {
+      const refDialog = this.dialog.open(NewAppointmentComponent);
+    }
+  }
+
+  mantenimientos(appointments: Appointment[]) {
+    appointments.forEach(element => {
+      if(element.status == 'Agendado') {
+        this.maintenance.push(element);
+      } 
+    });
   }
 
   userCredential() {

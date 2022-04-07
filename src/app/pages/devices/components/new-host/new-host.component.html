@@ -39,7 +39,6 @@
                     </div>
                 </div>
 
-                <!-- Usuario del Pc -->
                 <div class="row">
                     <div class="col-sm-12 col-lg-4">
                         <mat-form-field appearance="outline">
@@ -60,17 +59,19 @@
                     <div class="col-sm-10 col-lg-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Asignar a</mat-label>
-                            <input matInput type="text" name="employee" #employee="ngModel" [(ngModel)]="host.employee">
+                            <mat-select *ngIf="!isEdit" name="employee" #employee="ngModel" [(ngModel)]="host.employee"
+                                required>
+                                <div *ngFor="let employee of employees">
+                                    <mat-option value="{{employee.name}}">{{employee.name}}</mat-option>
+                                </div>
+                            </mat-select>
+
+                            <input matInput type="text" *ngIf="isEdit" name="employee" #employee="ngModel"
+                                [(ngModel)]="host.employee">
                         </mat-form-field>
-                    </div>
-                    <div class="col-sm-2 col-lg-4">
-                        <button mat-raised-button type="button" color="primary" (click)="openDialog()">
-                            <mat-icon>search</mat-icon>
-                        </button>
                     </div>
                 </div>
 
-                <!-- Maquina -->
                 <div class="row">
                     <div class="col-sm-12 col-lg-4">
                         <mat-form-field appearance="outline">
@@ -110,7 +111,6 @@
                     </div>
                 </div>
 
-                <!-- Hardware -->
                 <div class="row">
                     <div class="col-sm-12 col-lg-6">
                         <mat-form-field appearance="outline">
@@ -148,39 +148,68 @@
 
                 <hr class="p-1">
 
-                <!-- S/O -->
                 <div class="row">
+
                     <div class="col-sm-12 col-lg-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Sistema Operativo</mat-label>
-                            <input matInput type="text" name="system" #system="ngModel"
+
+                            <input matInput *ngIf="!isEdit" type="text" name="system" #system="ngModel"
                                 [(ngModel)]="software.system.name" required>
+
+                            <input matInput *ngIf="isEdit" type="text" name="system" #system="ngModel"
+                                [(ngModel)]="host.software[0].system.name" required>
                         </mat-form-field>
                     </div>
+
                     <div class="col-sm-12 col-lg-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Funcionalidad</mat-label>
-                            <input matInput type="text" name="system_functionality" #system_functionality="ngModel"
+
+                            <input matInput *ngIf="!isEdit" type="text" name="system_functionality" #system_functionality="ngModel"
                                 [(ngModel)]="software.system.functionality">
+
+                            <input matInput *ngIf="isEdit" type="text" name="system_functionality" #system_functionality="ngModel"
+                                [(ngModel)]="host.software[0].system.functionality">
                         </mat-form-field>
                     </div>
+
                     <div class="col-sm-12 col-lg-4">
                         <mat-label class="text-secondary">Estado de Licencia: </mat-label>
                         <br class="my-1">
-                        <mat-radio-group name="system_license" #system_license="ngModel"
+
+                        <mat-radio-group *ngIf="!isEdit" name="system_license" #system_license="ngModel"
                             [(ngModel)]="software.system.license" required>
+                            <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
+                            <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
+                        </mat-radio-group>
+
+                        <mat-radio-group *ngIf="isEdit" name="system_license" #system_license="ngModel"
+                            [(ngModel)]="host.software[0].system.license" required>
                             <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
                             <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
                         </mat-radio-group>
                     </div>
                 </div>
 
-                <!-- Office -->
                 <div class="row">
+
                     <div class="col-sm-12 col-lg-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Office</mat-label>
-                            <mat-select name="office" #office="ngModel" [(ngModel)]="software.office.name" required>
+
+                            <mat-select *ngIf="!isEdit" name="office" #office="ngModel" [(ngModel)]="software.office.name" required>
+                                <mat-option value="Microsoft 365 Business">Microsoft 365 Business</mat-option>
+                                <mat-option value="Microsoft Hogar y Empresarial 2013">Microsoft Hogar y Empresarial
+                                    2013
+                                </mat-option>
+                                <mat-option value="Microsoft Office Hogar y Pequeña Empresa 2010">Microsoft Office
+                                    Hogar y
+                                    Pequeña Empresa 2010</mat-option>
+                                <mat-option value="No licenciado">No Licenciado</mat-option>
+                            </mat-select>
+
+                            <mat-select *ngIf="isEdit" name="office" #office="ngModel" [(ngModel)]="host.software[0].office.name" required>
                                 <mat-option value="Microsoft 365 Business">Microsoft 365 Business</mat-option>
                                 <mat-option value="Microsoft Hogar y Empresarial 2013">Microsoft Hogar y Empresarial
                                     2013
@@ -192,30 +221,53 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
+
                     <div class="col-sm-12 col-lg-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Funcionalidad</mat-label>
-                            <input matInput type="text" name="office_functionality" #office_functionality="ngModel"
+
+                            <input matInput *ngIf="!isEdit" type="text" name="office_functionality" #office_functionality="ngModel"
                                 [(ngModel)]="software.office.functionality">
+
+                            <input matInput *ngIf="isEdit" type="text" name="office_functionality" #office_functionality="ngModel"
+                                [(ngModel)]="host.software[0].office.functionality">
                         </mat-form-field>
                     </div>
+
                     <div class="col-sm-12 col-lg-4">
                         <mat-label class="text-secondary">Estado de Licencia: </mat-label>
                         <br class="my-1">
-                        <mat-radio-group name="office_license" #office_license="ngModel"
+
+                        <mat-radio-group *ngIf="!isEdit" name="office_license" #office_license="ngModel"
                             [(ngModel)]="software.office.license" required>
+                            <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
+                            <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
+                        </mat-radio-group>
+
+                        <mat-radio-group *ngIf="isEdit" name="office_license" #office_license="ngModel"
+                            [(ngModel)]="host.software[0].office.license" required>
                             <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
                             <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
                         </mat-radio-group>
                     </div>
                 </div>
 
-                <!-- Antivirus -->
                 <div class="row">
+
                     <div class="col-sm-12 col-lg-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Antivirus</mat-label>
-                            <mat-select name="antivirus" #antivirus="ngModel" [(ngModel)]="software.antivirus.name"
+                            
+                            <mat-select *ngIf="!isEdit" name="antivirus" #antivirus="ngModel" [(ngModel)]="software.antivirus.name"
+                                required>
+                                <mat-option value="Avast Free">Avast Free</mat-option>
+                                <mat-option value="Kaspersky - 5 nodos">Kaspersky - 5 nodos</mat-option>
+                                <mat-option value="Kaspersky - 21 nodos">Kaspersky - 21 nodos</mat-option>
+                                <mat-option value="McAffe">McAffe</mat-option>
+                                <mat-option value="Windows Defender">Windows Defender</mat-option>
+                            </mat-select>
+
+                            <mat-select *ngIf="isEdit" name="antivirus" #antivirus="ngModel" [(ngModel)]="host.software[0].antivirus.name"
                                 required>
                                 <mat-option value="Avast Free">Avast Free</mat-option>
                                 <mat-option value="Kaspersky - 5 nodos">Kaspersky - 5 nodos</mat-option>
@@ -225,22 +277,36 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
+
                     <div class="col-sm-12 col-lg-4">
                         <mat-form-field appearance="outline">
                             <mat-label>Funcionalidad</mat-label>
-                            <input matInput type="text" name="antivirus_functionality"
+
+                            <input matInput *ngIf="!isEdit" type="text" name="antivirus_functionality"
                                 #antivirus_functionality="ngModel" [(ngModel)]="software.antivirus.functionality">
+
+                            <input matInput *ngIf="isEdit" type="text" name="antivirus_functionality"
+                                #antivirus_functionality="ngModel" [(ngModel)]="host.software[0].antivirus.functionality">
                         </mat-form-field>
                     </div>
+
                     <div class="col-sm-12 col-lg-4">
                         <mat-label class="text-secondary">Estado de Licencia: </mat-label>
                         <br class="my-1">
-                        <mat-radio-group name="antivirus_license" #antivirus_license="ngModel"
+
+                        <mat-radio-group *ngIf="!isEdit" name="antivirus_license" #antivirus_license="ngModel"
                             [(ngModel)]="software.antivirus.license" required>
                             <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
                             <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
                         </mat-radio-group>
+
+                        <mat-radio-group *ngIf="isEdit" name="antivirus_license" #antivirus_license="ngModel"
+                            [(ngModel)]="host.software[0].antivirus.license" required>
+                            <mat-radio-button class="mx-3" value="Activa">Activa</mat-radio-button>
+                            <mat-radio-button class="mx-3" value="Vencida">Vencida</mat-radio-button>
+                        </mat-radio-group>
                     </div>
+
                 </div>
 
                 <div class="row">

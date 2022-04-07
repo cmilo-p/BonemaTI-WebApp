@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-12">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+  
+          <span class="navbar-brand">
+            <mat-icon class="me-2">people</mat-icon>
+            Historio de Mantenimientos
+          </span>
+  
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+  
+            <span class="spacer"></span>
+  
+            <button mat-raised-button class="mx-1" color="primary" title="Agregar Empleado" [routerLink]="['/calendar/appointment']">
+              <mat-icon>add_circle</mat-icon>
+            </button>
+  
+            <button mat-raised-button class="mx-1" title="Filtrar Datos" disabled="true">
+              <mat-icon>filter_alt</mat-icon>
+            </button>
+  
+            <button mat-raised-button class="mx-1" [matMenuTriggerFor]="menu">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item disabled="true">Exportar Tabla</button>
+              <app-exports-btn (exportFile)="exporter.exportTable($event.extFile)"></app-exports-btn>
+            </mat-menu>
+  
+            <button mat-raised-button color="warn" [routerLink]="['/calendar']">
+              <mat-icon>home</mat-icon>
+            </button>
+  
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12">
+      <mat-form-field appearance="standard">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+      </mat-form-field>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12">
+      <table mat-table [dataSource]="dataSource" matTableExporter #exporter="matTableExporter">
+  
+        <ng-container matColumnDef="AGENDAMIENTO">
+          <th mat-header-cell *matHeaderCellDef> AGENDAMIENTO </th>
+          <td mat-cell *matCellDef="let row">
+            <a [routerLink]="['/calendar/appointment/', row._id]">{{row.date_appointment  | date: 'dd/MM/yyyy' }}</a>
+          </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="TIPO MANTENIMIENTO">
+          <th mat-header-cell *matHeaderCellDef> TIPO MANTENIMIENTO </th>
+          <td mat-cell *matCellDef="let row"> {{row.tpMaintenance}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="EQUIPO">
+          <th mat-header-cell *matHeaderCellDef> EQUIPO </th>
+          <td mat-cell *matCellDef="let row"> {{row.host}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="FUNCIONARIO">
+          <th mat-header-cell *matHeaderCellDef> FUNCIONARIO </th>
+          <td mat-cell *matCellDef="let row"> {{ row.employee}} </td>
+        </ng-container>
+  
+        <ng-container matColumnDef="ESTADO">
+          <th mat-header-cell *matHeaderCellDef> ESTADO </th>
+          <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No hay que coincidan con la búsqueda de: "{{input.value}}"</td>
+        </tr>
+      </table>
+  
+      <mat-paginator [pageSizeOptions]="[6, 12, 25]" aria-label="Select page of users"></mat-paginator>
+  
+    </div>
+  </div>

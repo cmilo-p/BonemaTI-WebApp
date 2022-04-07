@@ -85,6 +85,10 @@
         </div>
         <div class="text-center" *ngIf="isEdit">
             <img src="/assets/images/moduls/employees/employeeSuccess.svg" alt="employeesSuccess.svg">
+            <button mat-raised-button [routerLink]="['/config/newEmployee']" class="mt-3" color="primary">
+                    <mat-icon>person_add</mat-icon>
+                    <span>Crear nuevo empleado</span>
+            </button>
         </div>
     </div>
 

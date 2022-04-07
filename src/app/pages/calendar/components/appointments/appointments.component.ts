@@ -10,7 +10,7 @@ export class AppointmentsComponent implements OnInit {
 
   @Input() appointments!: Appointment[];
 
-  constructor() { 
+  constructor() {
   }
 
   ngOnInit(): void {

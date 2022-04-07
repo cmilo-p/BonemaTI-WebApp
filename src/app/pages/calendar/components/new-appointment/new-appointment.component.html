@@ -100,7 +100,7 @@
                             <mat-label>Procedimientos</mat-label>
 
                             <textarea matInput type="text" name="procedures" #procedures="ngModel"
-                                [(ngModel)]="appointment.procedures" readonly></textarea>
+                                [(ngModel)]="appointment.procedures"></textarea>
                         </mat-form-field>
                     </div>
 
@@ -109,27 +109,30 @@
                             <mat-label>Observaciones</mat-label>
 
                             <textarea matInput type="text" name="observations" #observations="ngModel"
-                                [(ngModel)]="appointment.observations" [readonly]="isEdit"></textarea>
+                                [(ngModel)]="appointment.observations"></textarea>
                         </mat-form-field>
                     </div>
                 </div>
 
                 <mat-form-field *ngIf="isEdit" appearance="outline" class="text-center">
                     <mat-label>Estado</mat-label>
+                    <mat-select *ngIf="isEdit" name="status" #status="ngModel" [(ngModel)]="appointment.status">
+                        <mat-option value="Agendado">Agendado</mat-option>
+                        <mat-option value="Realizado">Realizado</mat-option>
+                    </mat-select>
 
-                    <input matInput type="text" name="status" #status="ngModel" [(ngModel)]="appointment.status"
-                        readonly>
+                    <input matInput *ngIf="!isEdit" type="text" name="status" #status="ngModel" [(ngModel)]="appointment.status">
                 </mat-form-field>
 
                 <div class="row">
                     <div class="col">
                         <div class="my-3">
 
-                            <button mat-raised-button type="button" class="mx-1" [routerLink]="['/calendar']">
+                            <button mat-raised-button mat-dialog-close type="button" class="mx-1" [routerLink]="['/calendar']">
                                 <mat-icon>arrow_back</mat-icon>
                             </button>
 
-                            <button mat-raised-button type="submit" *ngIf="!isEdit" class="mx-1" color="primary">
+                            <button mat-raised-button [mat-dialog-close]="true" type="submit" *ngIf="!isEdit" class="mx-1" color="primary">
                                 <mat-icon>save</mat-icon>
                             </button>
 
@@ -149,14 +152,5 @@
             </form>
         </mat-card>
     </div>
-
-    <!-- <div class="col-lg-5">
-        <div class="text-center" *ngIf="!isEdit">
-            <img src="/assets/images/moduls/calendar/appointmentEmpty.svg" alt="usersEmpty.svg">
-        </div>
-        <div class="text-center" *ngIf="isEdit">
-            <img src="/assets/images/moduls/calendar/appointmentSuccess.svg" alt="usersSuccess.svg">
-        </div>
-    </div> -->
 
 </div>

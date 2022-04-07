@@ -1,32 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Employee } from 'src/app/models/Employee';
+import { EmployeesService } from 'src/app/services/employees.service';
 import { Device, Hardware, Software } from 'src/app/models/Devices';
 import { DevicesService } from 'src/app/services/devices.service';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
-import { EmployeesComponent } from 'src/app/pages/configuration/components/employees/employees.component';
 
 @Component({
   selector: 'app-new-host',
   templateUrl: './new-host.component.html',
   styleUrls: ['./new-host.component.scss'],
-  providers: [DevicesService]
+  providers: [
+    EmployeesService,
+    DevicesService
+  ]
 })
 export class NewHostComponent implements OnInit {
 
   public title_form: string;
   public isEdit: boolean;
 
+  public employees!: Employee[];
   public host: Device;
   public hardware: Hardware;
   public software: any;
 
   constructor(
+    private employeeSvc: EmployeesService,
     private deviceSvc: DevicesService,
     private _rt: Router ,
-    private _snackBar: MatSnackBar,
-    public dialog: MatDialog
+    private _snackBar: MatSnackBar
   ) {
     this.title_form = 'INGRESAR HOST';
     this.isEdit = false;
@@ -37,6 +41,17 @@ export class NewHostComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.employeeSvc.getEmployees().subscribe(
+      {
+        next:(response) => {
+          this.employees = response.employees;
+        },
+        error:(error) => {
+          console.error(error);
+          
+        }
+      }
+    )
   }
 
   onSubmit() {
@@ -59,14 +74,6 @@ export class NewHostComponent implements OnInit {
         }
       }
     );
-  }
-
-  /* Implementar Dialogo */
-  openDialog() {
-    const dialogRef = this.dialog.open(EmployeesComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
   openSnackBar(message: string, action: string) {

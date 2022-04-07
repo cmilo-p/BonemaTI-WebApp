@@ -3,12 +3,12 @@
   <div class="row">
     <div class="col-12">
       <h1>BonemaTI-WebApp</h1>
+      <h2>Dashboard</h2>
     </div>
   </div>
 
   <div class="row my-4">
-
-    <div class="col-sm-12 col-xl-9">
+    <div class="col-12">
       <div class="d-flex justify-content-center">
         <ngx-charts-bar-vertical [view]="view" [results]="single" [gradient]="gradient" [xAxis]="showXAxis"
           [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
@@ -16,37 +16,23 @@
         </ngx-charts-bar-vertical>
       </div>
     </div>
-
-    <div class="col-sm-12 col-xl-3">
-
-      <h2>Controles</h2>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Cambie el grafico</mat-label>
-        <mat-select>
-          <mat-option value="bar-chart">Grafico de Barras</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-    </div>
-
   </div>
 
   <div class="row">
 
-    <div class="col-3">
-      <mat-card class="rounded bg-success">
-        <a class="fst-italic" [routerLink]="['/routePath']" routerLinkActive="active">Total Equipos</a>
+    <div class="col-sm-12 col-lg-4">
+      <mat-card class="rounded">
+        <a class="fst-italic" [routerLink]="['/routePath']" routerLinkActive="active">Cant. Equipos</a>
         <div class="text-center my-4">
-          <span class="fs-2 fw-bold">{{ totalHost }}</span>
+          <span class="fs-2 fw-bold">{{ totalHosts }}</span>
         </div>
       </mat-card>
     </div>
 
-    <div class="col-3">
+    <div class="col-sm-12 col-lg-4">
       <mat-card class="border rounded">
         <a class="fst-italic" [routerLink]="['/routePath']" routerLinkActive="active">
-          Mantenimientos Ejecutados
+          Mantenimientos del Mes
         </a>
         <div class="text-center my-4">
           <span class="fs-2 fw-bold">2 / 35</span>
@@ -54,20 +40,11 @@
       </mat-card>
     </div>
 
-    <div class="col-3">
+    <div class="col-sm-12 col-lg-4">
       <mat-card class="border rounded">
-        <a class="fst-italic" [routerLink]="['/routePath']" routerLinkActive="active">Total Equipos</a>
+        <a class="fst-italic" [routerLink]="['/routePath']" routerLinkActive="active">Cant. Empleados</a>
         <div class="text-center my-4">
-          <span class="fs-2 fw-bold">2 / 5</span>
-        </div>
-      </mat-card>
-    </div>
-
-    <div class="col-3">
-      <mat-card class="border rounded">
-        <a class="fst-italic" [routerLink]="['/routePath']" routerLinkActive="active">Total Equipos</a>
-        <div class="text-center my-4">
-          <span class="fs-2 fw-bold">2 / 5</span>
+          <span class="fs-2 fw-bold">{{ totalEmployees }}</span>
         </div>
       </mat-card>
     </div>

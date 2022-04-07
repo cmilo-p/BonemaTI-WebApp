@@ -1,8 +1,13 @@
 .card-header-image-1 {
-    background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+    background-image: url("/assets/images/moduls/calendar/icons/hardware.png");
     background-size: cover;
 }
 .card-header-image-2 {
-    background-image: url("https://material.angular.io/assets/img/examples/shiba2.jpg");
+    background-image: url("/assets/images/moduls/calendar/icons/software.png");
     background-size: cover;
+}
+
+a {
+    color: #006064;
+    text-decoration: underline;
 }

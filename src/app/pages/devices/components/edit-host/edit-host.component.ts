@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Employee } from 'src/app/models/Employee';
 import { Device, Hardware } from 'src/app/models/Devices';
 import { DevicesService } from 'src/app/services/devices.service';
 
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { EmployeesComponent } from 'src/app/pages/configuration/components/employees/employees.component';
-
 @Component({
   selector: 'app-edit-host',
   templateUrl: '../new-host/new-host.component.html',
@@ -19,6 +17,7 @@ export class EditHostComponent implements OnInit {
   public status: string;
   public isEdit: boolean;
 
+  public employees!: Employee[];
   public host: Device;
   public hardware: Hardware;
   public software: any;
@@ -27,7 +26,6 @@ export class EditHostComponent implements OnInit {
     private deviceSvc: DevicesService,
     private _rt: Router,
     private _route: ActivatedRoute,
-    public dialog: MatDialog,
     private _snackBar: MatSnackBar
   ) {
     this.title_form = 'Editado';
@@ -68,14 +66,6 @@ export class EditHostComponent implements OnInit {
         }
       }
     );
-  }
-
-  /* Implemenar */
-  openDialog() {
-    const dialogRef = this.dialog.open(EmployeesComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
   getHost() {

@@ -1,27 +1,27 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { User } from 'src/app/models/User';
-import { UsersService } from 'src/app/services/users.service';
+import { Appointment } from 'src/app/models/Appointment';
+import { AppointmentsService } from 'src/app/services/appointments.service';
 
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
-  providers: [UsersService]
+  selector: 'app-list-appointments',
+  templateUrl: './list-appointments.component.html',
+  styleUrls: ['./list-appointments.component.scss'],
+  providers: [AppointmentsService]
 })
-export class UsersComponent implements AfterViewInit, OnInit {
+export class ListAppointmentsComponent implements AfterViewInit, OnInit {
 
   public displayedColumns: string[];
-  public dataSource: MatTableDataSource<User>;
+  public dataSource: MatTableDataSource<Appointment>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private userSvc: UsersService
+    private appointmentSvc: AppointmentsService
   ) {
-    this.displayedColumns = ['NOMBRE USUARIO', 'CORREO ELECTRONICO', 'USUARIO', 'ROL', 'ESTADO'];
+    this.displayedColumns = ['AGENDAMIENTO', 'TIPO MANTENIMIENTO', 'EQUIPO', 'FUNCIONARIO', 'ESTADO'];
     this.dataSource = new MatTableDataSource();
   }
 
@@ -30,10 +30,10 @@ export class UsersComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
-    this.userSvc.getUsers().subscribe(
+    this.appointmentSvc.getAppointments().subscribe(
       {
         next: (response) => {
-          this.dataSource.data = response.users;
+          this.dataSource.data = response.appointments;
         },
         error: (error) => {
           console.error(error);
