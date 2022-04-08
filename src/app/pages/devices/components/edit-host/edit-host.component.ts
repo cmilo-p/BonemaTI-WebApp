@@ -50,19 +50,17 @@ export class EditHostComponent implements OnInit {
       {
         next: (response) => {
           if (response.status == 'success') {
-            this.status = response.status;
             this.host = response.hostUpdate;
-
-            console.log(response);
             this._rt.navigate(['/devices/host/', this.host._id]);
+            this.openSnackBar('Host Actualizado', 'Cerrar');
 
           } else {
-            this.host = response.message;
-            console.log(response);
+            this.openSnackBar(response.message, 'Cerrar');
+            console.warn(response);
           }
         },
         error: (error) => {
-          console.log(error);
+          console.error(error);
         }
       }
     );

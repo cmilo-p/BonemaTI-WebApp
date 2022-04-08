@@ -87,6 +87,7 @@ export class NewAppointmentComponent implements OnInit {
         },
         error: (error) => {
           this.openSnackBar('Error al registrar el mantenimiento', 'Cerrar');
+          console.error(error);
         }
       }
     );
